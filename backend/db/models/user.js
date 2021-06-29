@@ -28,12 +28,40 @@ module.exports = (sequelize, DataTypes) => {
         isEmail: true,
       },
     },
-    hashedPassword: {
+    hashed_password: {
       type: DataTypes.STRING.BINARY,
       allowNull: false,
       validate: {
         len: [60, 60],
       },
+    },
+    first_name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        len: [0, 30]
+      }
+    },
+    last_name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        len: [0, 30]
+      }
+    },
+    zip_code: {
+      type: DataTypes.INTEGER,
+      validate: {
+        isInt: true,
+      }
+    },
+    mentor: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+    },
+    student: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
     },
   },
   {
