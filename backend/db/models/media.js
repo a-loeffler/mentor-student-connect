@@ -13,6 +13,8 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   Media.associate = function(models) {
     // associations can be defined here
+    Media.belongsTo(models.User, { foreignKey: 'user_id' });
+    
   };
   return Media;
 };

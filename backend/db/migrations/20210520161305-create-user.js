@@ -1,7 +1,5 @@
 'use strict';
 
-const { DataTypes } = require("sequelize/types");
-
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.createTable('Users', {
@@ -26,23 +24,23 @@ module.exports = {
         allowNull: false,
       },
       first_name: {
-        type: DataTypes.STRING(30),
+        type: Sequelize.STRING(30),
         allowNull: false,
       },
       last_name: {
-        type: DataTypes.STRING(30),
+        type: Sequelize.STRING(30),
         allowNull: false,
       },
       zip_code: {
-        type: DataTypes.INTEGER,
+        type: Sequelize.STRING(5),
         allowNull: false,
       },
       mentor: {
-        type: DataTypes.BOOLEAN,
+        type: Sequelize.BOOLEAN,
         defaultValue: false,
       },
       student: {
-        type: DataTypes.BOOLEAN,
+        type: Sequelize.BOOLEAN,
         defaultValue: false,
       },
       createdAt: {

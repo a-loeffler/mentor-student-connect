@@ -7,6 +7,9 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   Connection.associate = function(models) {
     // associations can be defined here
+    Connection.belongsTo(models.User, {foreignKey: 'student_id'});
+    Connection.belongsTo(models.User, {foreignKey: 'mentor_id'});
+
   };
   return Connection;
 };
