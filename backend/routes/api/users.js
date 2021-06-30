@@ -62,7 +62,6 @@ router.get('/:userId(\\d+)/messages', asyncHandler(async (req, res) => {
   //End Query
 
   console.log("messages", messages)
-  //Sort Data
 
 
   return res.json({messages})
