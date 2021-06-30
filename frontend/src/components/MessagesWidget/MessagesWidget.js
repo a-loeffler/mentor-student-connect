@@ -2,8 +2,8 @@
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
-import { Conversations } from "./Conversations"
-import { TextMessages }  from "./TextMessages"
+import Conversations from "./Conversations"
+import TextMessages from "./TextMessages"
 
 const MessagesWidget = () => {
     const dispatch = useDispatch();
@@ -27,10 +27,11 @@ const MessagesWidget = () => {
                     let process1 = elementId.split("-");
                     let convoId = process1[process1.length - 1]
 
-                    e.target.classList.add("shift")
+                    e.target.classList.add("shift") // in css, make sure this animation lasts for 1s
 
                     setTimeout(() => {
                         setActiveTexts(messagesObject[convoId])
+                        //to-do: create and run thunk action to change "unreads" if needed
                     }, 1000)
 
                 })
@@ -62,7 +63,7 @@ const MessagesWidget = () => {
                 <Conversations conversationIds={conversationIds} messagesObject={messagesObject} />
             </div>
             <div className="texts-container">
-                <TextMessages texts={activeTexts} />
+                <TextMessages texts={activeTexts, userId} />
             </div>
         </div>
     )

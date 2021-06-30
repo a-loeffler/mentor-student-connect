@@ -1,7 +1,7 @@
+import TextBubble from './TextBubble';
 
 
-
-const TextMessages = ({texts}) => {
+const TextMessages = ({activeTexts, userId}) => {
 
 
     //to-do: get individual messages out of the messages object
@@ -10,7 +10,7 @@ const TextMessages = ({texts}) => {
 
     return (
         <div className="text-messages-container">
-            {texts.map(text => <TextBubble />)}
+            {activeTexts.map(text => <TextBubble bubbleType={text.sender_id === userId ? "outgoing" : "incoming"} contents={text.contents}/>)}
         </div>
     )
 }

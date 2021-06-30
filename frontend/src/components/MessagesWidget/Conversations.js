@@ -1,4 +1,4 @@
-import {ConversationListItem} from './ConversationListItem'
+import ConversationListItem from './ConversationListItem'
 
 
 
