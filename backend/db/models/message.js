@@ -16,6 +16,10 @@ module.exports = (sequelize, DataTypes) => {
         len: [0, 800],
       }
     },
+    read: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+    }
   }, {});
   Message.associate = function(models) {
     // associations can be defined here

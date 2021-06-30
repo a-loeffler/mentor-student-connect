@@ -6,27 +6,32 @@ module.exports = {
       {
         sender_id: 2,
         recipient_id: 1,
-        contents: "Hey there, nice 2 meet u"
+        contents: "Hey there, nice 2 meet u",
+        read: true,
       },
       {
         sender_id: 1,
         recipient_id: 2,
-        contents: "Hi"
+        contents: "Hi",
+        read: true
       },
       {
         sender_id: 1,
         recipient_id: 2,
-        contents: "Want to shoot hoops this weekend?"
+        contents: "Want to shoot hoops this weekend?",
+        read: true,
       },
       {
         sender_id: 2,
         recipient_id: 1,
-        contents: "Sure"
+        contents: "Sure",
+        read: true,
       },
       {
         sender_id: 2,
         recipient_id: 1,
-        contents: "Where @?"
+        contents: "Where @?",
+        read: false,
       },
   ], {});
   },
