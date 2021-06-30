@@ -8,6 +8,7 @@ import * as sessionActions from './store/session';
 import LoginFormPage from './components/LoginFormPage';
 import SignUpFormPage from './components/SignUpFormPage';
 import Navigation from './components/Navigation';
+import MessagesWidget from './components/MessagesWidget/MessagesWidget';
 
 function App() {
   const dispatch = useDispatch()
@@ -28,6 +29,9 @@ function App() {
         </Route>
         <Route path="/signup">
           <SignUpFormPage />
+        </Route>
+        <Route path="/messages">
+          <MessagesWidget />
         </Route>
       </Switch>
     </>
