@@ -1,15 +1,21 @@
 import {NavLink} from 'react-router-dom';
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 
 import ProfileButton from './ProfileButton';
 import SearchBar from './SearchBar';
 
+import { getMessagesForUser } from '../../store/messages'
+
 
 const Navigation = ({ isLoaded }) => {
-
+    const dispatch = useDispatch();
 
 
     const currentUser = useSelector(state => state.session.user);
+
+    if (currentUser) {
+        dispatch(getMessagesForUser(currentUser.id))
+    }
 
     let navBarLinks;
     if (!currentUser) {
