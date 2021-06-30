@@ -2,9 +2,10 @@
 
 const express = require('express');
 const asyncHandler = require('express-async-handler');
+const { Op } = require('sequelize');
 
 const { setTokenCookie, requireAuth } = require('../../utils/auth');
-const { User } = require('../../db/models');
+const { User, Message } = require('../../db/models');
 
 const router = express.Router();
 
@@ -44,5 +45,27 @@ router.post('/', validateSignup, asyncHandler(async (req, res) => {
     return res.json({ user, });
 }));
 
+
+router.get('/:userId(\\d+)/messages', asyncHandler(async (req, res) => {
+  const userId = req.params.userId;
+
+  //Begin Query
+  const messages = await Message.findAll({
+    where: {
+      [Op.or]: [
+        {sender_id: userId},
+        {recipient_id: userId},
+      ]
+    },
+    order: ['id']
+  })
+  //End Query
+
+  console.log("messages", messages)
+  //Sort Data
+
+
+  return res.json({messages})
+}))
 
 module.exports = router;
