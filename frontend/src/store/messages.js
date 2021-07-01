@@ -27,7 +27,7 @@ const messagesReducer = (state = initialState, action) => {
         case GET_MESSAGES: {
             let newState = {};
             let messages = action.payload.messages; //an array of message objects
-            console.log(messages)
+
             let userId = action.payload.userId;
 
             messages.forEach(message => {
@@ -45,7 +45,7 @@ const messagesReducer = (state = initialState, action) => {
                         newState[message.sender_id] = [message]
                     }
                 }
-            console.log(newState)
+            
             })
 
             return newState;

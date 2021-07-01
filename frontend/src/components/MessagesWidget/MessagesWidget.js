@@ -6,18 +6,25 @@ import Conversations from "./Conversations"
 import TextMessages from "./TextMessages"
 
 const MessagesWidget = () => {
-    const dispatch = useDispatch();
+
 
 
     const messagesObject = useSelector((state) => state.userMessages)
     const user = useSelector(state => state.session.user)
 
     const [activeTexts, setActiveTexts] = useState([]);
-    const [userId, setUserId] = useState(null);
+    const [userId, setUserId] = useState(0);
 
-
+    console.log(activeTexts)
 
     useEffect(() => {
+        console.log(activeTexts)
+
+        if (user) {
+            setUserId(user.id)
+        }
+
+
         let conversationListItems = document.querySelectorAll(".conversation-list-item")
         if (conversationListItems) {
             conversationListItems.forEach(listItem => {
@@ -38,12 +45,10 @@ const MessagesWidget = () => {
             })
         }
 
-    }, [activeTexts])
+    }, [messagesObject, activeTexts])
 
 
-    if (user) {
-        setUserId(user.id)
-    }
+    //
 
     //each key in the messages object tells us the other user in the conversation;
     //each value holds an array of messages in order
@@ -63,7 +68,7 @@ const MessagesWidget = () => {
                 <Conversations conversationIds={conversationIds} messagesObject={messagesObject} />
             </div>
             <div className="texts-container">
-                <TextMessages texts={activeTexts, userId} />
+                {activeTexts && <TextMessages texts={activeTexts} userId={userId} />}
             </div>
         </div>
     )
