@@ -8,7 +8,7 @@ import * as sessionActions from './store/session';
 import LoginFormPage from './components/LoginFormPage';
 import SignUpFormPage from './components/SignUpFormPage';
 import Navigation from './components/Navigation';
-import MessagesWidget from './components/MessagesWidget/MessagesWidget';
+import MessagesWidget from './components/MessagesWidget';
 
 function App() {
   const dispatch = useDispatch()

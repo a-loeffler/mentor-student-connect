@@ -5,8 +5,6 @@
 const ConversationListItem = ({text, color, unread, itemId}) => {
 
 
-    //to-do: add animation effect on clicking the conversation-list-item
-
 
 
     return (
