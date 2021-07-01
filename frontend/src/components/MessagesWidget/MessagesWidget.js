@@ -13,13 +13,11 @@ const MessagesWidget = () => {
     const user = useSelector(state => state.session.user)
 
     const [activeTexts, setActiveTexts] = useState([]);
-    const [userId, setUserId] = useState(0);
+    const [userId, setUserId] = useState(null);
 
-    console.log(activeTexts)
+    console.log("activeTexts line18", activeTexts)
 
     useEffect(() => {
-        console.log(activeTexts)
-
         if (user) {
             setUserId(user.id)
         }
@@ -32,7 +30,8 @@ const MessagesWidget = () => {
                     let elementId = e.target.id;
 
                     let process1 = elementId.split("-");
-                    let convoId = process1[process1.length - 1]
+                    let convoId = Number(process1[process1.length - 1])
+                    console.log("convoId", convoId)
 
                     e.target.classList.add("shift") // in css, make sure this animation lasts for 1s
 
@@ -68,7 +67,7 @@ const MessagesWidget = () => {
                 <Conversations conversationIds={conversationIds} messagesObject={messagesObject} />
             </div>
             <div className="texts-container">
-                {activeTexts && <TextMessages texts={activeTexts} userId={userId} />}
+                {activeTexts.length > 0 && <TextMessages activeTexts={activeTexts} userId={userId} />}
             </div>
         </div>
     )
