@@ -1,23 +1,31 @@
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 
 import TextBubble from './TextBubble';
+import { postNewMessage } from '../../store/messages';
 
 
-const TextMessages = ({activeTexts, userId}) => {
+const TextMessages = ({activeTexts, userId, recipientId}) => {
+    const dispatch = useDispatch()
 
     const [messageText, setMessageText] = useState("")
 
-    //to-do: get individual messages out of the messages object
-
-
     const sendText = (e) => {
         e.preventDefault();
+
+        const contents = messageText;
+
+        dispatch(postNewMessage(userId, recipientId, contents))
+
+        setMessageText("");
 
         //to-do: dispatch thunk to post to database; rerender current position with new text
     }
 
 
+    console.log("activeTexts", activeTexts)
     //to-do: get media for little icon boxes next to messages
+    //to-do: display active character limit for text message at bottom
 
     return (
         <div className="text-messages-container">

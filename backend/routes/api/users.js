@@ -66,4 +66,43 @@ router.get('/:userId(\\d+)/messages', asyncHandler(async (req, res) => {
   return res.json({messages})
 }))
 
+
+router.post('/:userId(\\d+)/messages/:recipientId(\\d+)', asyncHandler(async (req, res) => {
+  const senderId = req.params.userId;
+  console.log(senderId)
+  const recipientId = req.params.recipientId;
+  console.log(recipientId)
+  const { contents } = req.body;
+
+  console.log(contents)
+
+  const read = false;
+
+  const newMessage = await Message.create({sender_id: senderId, recipient_id: recipientId, contents, read})
+
+
+  //get updated full conversation to add to store
+  const conversation = await Message.findAll({
+    where: {
+      [Op.or]: [
+        {
+          sender_id: {
+            [Op.or]: [senderId, recipientId]
+          }
+        },
+        {
+          recipient_id: {
+            [Op.or]: [senderId, recipientId]
+          }
+        }
+      ]
+    },
+    order: ['id']
+  })
+
+  console.log(conversation)
+
+  return res.json(`${contents}`)
+}))
+
 module.exports = router;
