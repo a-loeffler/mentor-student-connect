@@ -12,12 +12,13 @@ const TextMessages = ({activeTexts, userId, recipientId}) => {
 
     const sendText = (e) => {
         e.preventDefault();
+        if (messageText) {
+            const contents = messageText;
 
-        const contents = messageText;
+            dispatch(postNewMessage(userId, recipientId, contents))
 
-        dispatch(postNewMessage(userId, recipientId, contents))
-
-        setMessageText("");
+            setMessageText("");
+        }
 
         //to-do: dispatch thunk to post to database; rerender current position with new text
     }
@@ -30,7 +31,12 @@ const TextMessages = ({activeTexts, userId, recipientId}) => {
     return (
         <div className="text-messages-container">
             <div className="text-bubbles-display-container">
-                {activeTexts.map((text, index) => <TextBubble key={index} bubbleType={text.sender_id === userId ? "outgoing" : "incoming"} contents={text.contents}/>)}
+                {activeTexts.map((text, index) => <TextBubble
+                                                    key={index}
+                                                    bubbleType={text.sender_id === userId ? "outgoing" : "incoming"}
+                                                    contents={text.contents}
+                                                    last={index === activeTexts.length - 1}
+                                                    />)}
             </div>
             <form className="text-input-form" onSubmit={e => sendText(e)}>
                 <input className="text-input-field" type="text" placeholder="Add message" value={messageText} onChange={e => setMessageText(e.target.value)} autoFocus></input>

@@ -39,6 +39,12 @@ const MessagesWidget = () => {
                             e.target.id = "showing-now";
                             setActiveRecipentId(convoId)
                             setActiveTexts(messagesObject[convoId])
+
+                            let lastMessage = document.querySelector(".last")
+                            if (lastMessage) {
+                                console.log("in here", lastMessage)
+                                lastMessage.scrollIntoView(false);
+                            }
                             //to-do: create and run thunk action to change "unreads" if needed
                             //to-do: handle switching which conversation we're looking at.
                         }, 1000)
@@ -47,6 +53,8 @@ const MessagesWidget = () => {
                 })
             })
         }
+
+
 
     }, [messagesObject, activeTexts, minimized, user])
 
@@ -72,6 +80,7 @@ const MessagesWidget = () => {
     return (
         <div className="messages-widget-container">
             <div className={`widget-action-bar ${minimized === false ? "" : "full-border"}`}>
+                {`${minimized === false ? "": "Conversations"}`}
                 <button className="widget-collapse-button" onClick={e => minimizeActions(e)}>-</button>
             </div>
             <div className={`messages-component-container ${minimized === false ? "" : "minimized"}`}>
