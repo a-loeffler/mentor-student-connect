@@ -6,7 +6,8 @@ const TextMessages = ({activeTexts, userId}) => {
 
     //to-do: get individual messages out of the messages object
 
-
+    console.log("activeTexts", activeTexts)
+    console.log("userId", userId)
 
     return (
         <div className="text-messages-container">

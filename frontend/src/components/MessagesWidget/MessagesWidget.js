@@ -6,7 +6,7 @@ import Conversations from "./Conversations"
 import TextMessages from "./TextMessages"
 
 const MessagesWidget = () => {
-    const dispatch = useDispatch();
+
 
 
     const messagesObject = useSelector((state) => state.userMessages)
@@ -15,9 +15,14 @@ const MessagesWidget = () => {
     const [activeTexts, setActiveTexts] = useState([]);
     const [userId, setUserId] = useState(null);
 
-
+    console.log("activeTexts line18", activeTexts)
 
     useEffect(() => {
+        if (user) {
+            setUserId(user.id)
+        }
+
+
         let conversationListItems = document.querySelectorAll(".conversation-list-item")
         if (conversationListItems) {
             conversationListItems.forEach(listItem => {
@@ -25,7 +30,8 @@ const MessagesWidget = () => {
                     let elementId = e.target.id;
 
                     let process1 = elementId.split("-");
-                    let convoId = process1[process1.length - 1]
+                    let convoId = Number(process1[process1.length - 1])
+                    console.log("convoId", convoId)
 
                     e.target.classList.add("shift") // in css, make sure this animation lasts for 1s
 
@@ -38,12 +44,10 @@ const MessagesWidget = () => {
             })
         }
 
-    }, [activeTexts])
+    }, [messagesObject, activeTexts])
 
 
-    if (user) {
-        setUserId(user.id)
-    }
+    //
 
     //each key in the messages object tells us the other user in the conversation;
     //each value holds an array of messages in order
@@ -63,7 +67,7 @@ const MessagesWidget = () => {
                 <Conversations conversationIds={conversationIds} messagesObject={messagesObject} />
             </div>
             <div className="texts-container">
-                <TextMessages texts={activeTexts, userId} />
+                {activeTexts.length > 0 && <TextMessages activeTexts={activeTexts} userId={userId} />}
             </div>
         </div>
     )

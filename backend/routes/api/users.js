@@ -61,7 +61,6 @@ router.get('/:userId(\\d+)/messages', asyncHandler(async (req, res) => {
   })
   //End Query
 
-  console.log("messages", messages)
 
 
   return res.json({messages})
