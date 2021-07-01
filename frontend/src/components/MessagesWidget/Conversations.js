@@ -23,7 +23,7 @@ const Conversations = ({conversationIds, messagesObject}) => {
                                                     key={index}
                                                     unread={messagesObject[id].some(message => message.read === false)} //true if there's an unread msg
                                                     text={`${id}`}
-                                                    itemId={`conversation-${id}`} //use this for event listener on click later
+                                                    itemId={`conversation-${index % 2 === 0 ? "chocolate" : "brick"}-${id}`} //use this for event listener on click later
                                                     color={index % 2 === 0 ? "chocolate" : "brick"} />)}
         </div>
     )

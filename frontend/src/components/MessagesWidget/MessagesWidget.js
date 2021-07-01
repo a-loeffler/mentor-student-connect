@@ -14,6 +14,7 @@ const MessagesWidget = () => {
 
     const [activeTexts, setActiveTexts] = useState([]);
     const [userId, setUserId] = useState(null);
+    const [minimized, setMinimized] = useState(false);
 
     console.log("activeTexts line18", activeTexts)
 
@@ -28,23 +29,26 @@ const MessagesWidget = () => {
             conversationListItems.forEach(listItem => {
                 listItem.addEventListener("click", (e) => {
                     let elementId = e.target.id;
+                    if (elementId !== "showing-now") {
+                        let process1 = elementId.split("-");
+                        let convoId = Number(process1[process1.length - 1])
+                        let color = process1[process1.length - 2]
+                        console.log("convoId", convoId)
 
-                    let process1 = elementId.split("-");
-                    let convoId = Number(process1[process1.length - 1])
-                    console.log("convoId", convoId)
+                        e.target.classList.add(`${color}-shift`)
 
-                    e.target.classList.add("shift") // in css, make sure this animation lasts for 1s
-
-                    setTimeout(() => {
-                        setActiveTexts(messagesObject[convoId])
-                        //to-do: create and run thunk action to change "unreads" if needed
-                    }, 1000)
+                        setTimeout(() => {
+                            e.target.id = "showing-now";
+                            setActiveTexts(messagesObject[convoId])
+                            //to-do: create and run thunk action to change "unreads" if needed
+                        }, 1000)
+                    }
 
                 })
             })
         }
 
-    }, [messagesObject, activeTexts])
+    }, [messagesObject, activeTexts, minimized, user])
 
 
     //
@@ -54,20 +58,29 @@ const MessagesWidget = () => {
 
     const conversationIds = Object.keys(messagesObject)
 
-
+    const minimizeActions = (e) => {
+        e.preventDefault()
+        if (minimized === false) {
+            setMinimized(true)
+        } else {
+            setMinimized(false)
+        }
+    }
     //to-do: set up event listeners for each click on a ConversationListItem
         //thunk action to set the message to "read" being true
 
     return (
         <div className="messages-widget-container">
-            <div className="widget-action-bar">
-                <button className="widget-collapse-button">-</button>
+            <div className={`widget-action-bar ${minimized === false ? "" : "full-border"}`}>
+                <button className="widget-collapse-button" onClick={e => minimizeActions(e)}>-</button>
             </div>
-            <div className="conversations-container">
-                <Conversations conversationIds={conversationIds} messagesObject={messagesObject} />
-            </div>
-            <div className="texts-container">
-                {activeTexts.length > 0 && <TextMessages activeTexts={activeTexts} userId={userId} />}
+            <div className={`messages-component-container ${minimized === false ? "" : "minimized"}`}>
+                <div className="conversations-container">
+                    <Conversations conversationIds={conversationIds} messagesObject={messagesObject} />
+                </div>
+                <div className="texts-container">
+                    {activeTexts.length > 0 && <TextMessages activeTexts={activeTexts} userId={userId} />}
+                </div>
             </div>
         </div>
     )
