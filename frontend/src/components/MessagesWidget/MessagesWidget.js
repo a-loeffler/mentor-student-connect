@@ -15,8 +15,7 @@ const MessagesWidget = () => {
     const [activeTexts, setActiveTexts] = useState([]);
     const [userId, setUserId] = useState(null);
     const [minimized, setMinimized] = useState(false);
-
-    console.log("activeTexts line18", activeTexts)
+    const [activeRecipientId, setActiveRecipentId] = useState(null);
 
     useEffect(() => {
         if (user) {
@@ -33,20 +32,29 @@ const MessagesWidget = () => {
                         let process1 = elementId.split("-");
                         let convoId = Number(process1[process1.length - 1])
                         let color = process1[process1.length - 2]
-                        console.log("convoId", convoId)
 
                         e.target.classList.add(`${color}-shift`)
 
                         setTimeout(() => {
                             e.target.id = "showing-now";
+                            setActiveRecipentId(convoId)
                             setActiveTexts(messagesObject[convoId])
+
+                            let lastMessage = document.querySelector(".last")
+                            if (lastMessage) {
+                                console.log("in here", lastMessage)
+                                lastMessage.scrollIntoView(false);
+                            }
                             //to-do: create and run thunk action to change "unreads" if needed
+                            //to-do: handle switching which conversation we're looking at.
                         }, 1000)
                     }
 
                 })
             })
         }
+
+
 
     }, [messagesObject, activeTexts, minimized, user])
 
@@ -72,14 +80,15 @@ const MessagesWidget = () => {
     return (
         <div className="messages-widget-container">
             <div className={`widget-action-bar ${minimized === false ? "" : "full-border"}`}>
+                {`${minimized === false ? "": "Conversations"}`}
                 <button className="widget-collapse-button" onClick={e => minimizeActions(e)}>-</button>
             </div>
             <div className={`messages-component-container ${minimized === false ? "" : "minimized"}`}>
                 <div className="conversations-container">
-                    <Conversations conversationIds={conversationIds} messagesObject={messagesObject} />
+                    {messagesObject && conversationIds.length && <Conversations conversationIds={conversationIds} messagesObject={messagesObject} />}
                 </div>
                 <div className="texts-container">
-                    {activeTexts.length > 0 && <TextMessages activeTexts={activeTexts} userId={userId} />}
+                    {activeTexts.length > 0 && <TextMessages activeTexts={activeTexts} userId={userId} recipientId={activeRecipientId} />}
                 </div>
             </div>
         </div>

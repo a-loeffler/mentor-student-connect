@@ -1,9 +1,20 @@
+import { csrfFetch } from './csrf'
+
 const GET_MESSAGES = "messages/get";
+const POST_MESSAGE = "messages/post"
+
 
 const getMessages = (messages, userId) => {
     return {
         type: GET_MESSAGES,
         payload: {messages, userId}
+    }
+}
+
+const postMessage = (recipientId, conversation) => {
+    return {
+        type: POST_MESSAGE,
+        payload: { recipientId, conversation}
     }
 }
 
@@ -17,7 +28,19 @@ export const getMessagesForUser = (userId) => async(dispatch) => {
 }
 
 
+export const postNewMessage = (userId, recipientId, contents) => async(dispatch) => {
+    const response = await csrfFetch(`/api/users/${userId}/messages/${recipientId}`, {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({contents})
+    })
+    const data = await response.json()
+    //expect back the full list of messages that match the recipientId
+    dispatch(postMessage(recipientId, data))
 
+}
 
 
 const initialState = {}
@@ -45,9 +68,15 @@ const messagesReducer = (state = initialState, action) => {
                         newState[message.sender_id] = [message]
                     }
                 }
-            
+
             })
 
+            return newState;
+        }
+        case POST_MESSAGE: {
+            let newState = {...state}
+            let recipientId = action.payload.recipientId;
+            newState[recipientId] = action.payload.conversation;
             return newState;
         }
         default: {
