@@ -2,10 +2,10 @@
 
 const express = require('express');
 const asyncHandler = require('express-async-handler');
-const { Op } = require('sequelize');
+const { Sequelize, Op } = require('sequelize');
 
 const { setTokenCookie, requireAuth } = require('../../utils/auth');
-const { User, Message } = require('../../db/models');
+const { User, Message, Connection } = require('../../db/models');
 
 const router = express.Router();
 
@@ -47,7 +47,7 @@ router.post('/', validateSignup, asyncHandler(async (req, res) => {
 
 
 router.get('/:userId(\\d+)/messages', asyncHandler(async (req, res) => {
-  const userId = req.params.userId;
+  const userId = parseInt(req.params.userId, 10);
 
   //Begin Query
   const messages = await Message.findAll({
@@ -68,13 +68,13 @@ router.get('/:userId(\\d+)/messages', asyncHandler(async (req, res) => {
 
 
 router.post('/:userId(\\d+)/messages/:recipientId(\\d+)', asyncHandler(async (req, res) => {
-  const senderId = req.params.userId;
-  console.log(senderId)
-  const recipientId = req.params.recipientId;
-  console.log(recipientId)
+  const senderId = parseInt(req.params.userId, 10);
+
+  const recipientId = parseInt(req.params.recipientId, 10);
+
   const { contents } = req.body;
 
-  console.log(contents)
+
 
   const read = false;
 
@@ -103,5 +103,37 @@ router.post('/:userId(\\d+)/messages/:recipientId(\\d+)', asyncHandler(async (re
 
   return res.json({conversation})
 }))
+
+
+router.get('/:userId(\\d+)/connections', asyncHandler(async (req, res) => {
+  const userId = req.params.userId;
+
+  //Begin Query
+  const connections = await Connection.findAll(
+    {
+      where: {
+        [Op.or]: [{student_id: userId}, {mentor_id: userId}]
+      },
+      include: [
+        {
+          model: User,
+          // where: {
+          //   [Op.or]: [{id: Sequelize.col('Connection.student_id')}, {id: Sequelize.col('Connection.mentor_id')}]
+          // },
+          // where: {
+          //   [Op.or]: []
+          // }
+          attributes: ['first_name', 'last_name']
+        }
+      ]
+    }
+  )
+
+  console.log(connections)
+
+  return res.json({connections})
+}))
+
+
 
 module.exports = router;

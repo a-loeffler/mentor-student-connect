@@ -9,17 +9,27 @@ const MessagesWidget = () => {
 
 
 
-    const messagesObject = useSelector((state) => state.userMessages)
+    const messagesObject = useSelector((state) => state.userMessages.allMessages)
+    const connections = useSelector((state) => state.userConnections.allConnections)
+
     const user = useSelector(state => state.session.user)
 
     const [activeTexts, setActiveTexts] = useState([]);
     const [userId, setUserId] = useState(null);
     const [minimized, setMinimized] = useState(false);
     const [activeRecipientId, setActiveRecipentId] = useState(null);
+    const [approvedConnections, setApprovedConnections] = useState([]);
 
     useEffect(() => {
         if (user) {
             setUserId(user.id)
+        }
+
+
+        if (connections) {
+            let approvedConnectionsList = connections.filter(connection => connection.approved)
+            console.log(approvedConnectionsList)
+            setApprovedConnections(approvedConnectionsList)
         }
 
 
@@ -56,9 +66,9 @@ const MessagesWidget = () => {
 
 
 
-    }, [messagesObject, activeTexts, minimized, user])
+    }, [messagesObject, activeTexts, minimized, user, connections])
 
-
+    console.log("MessagesWidget ***messagesObject", messagesObject)
     //
 
     //each key in the messages object tells us the other user in the conversation;
@@ -85,7 +95,7 @@ const MessagesWidget = () => {
             </div>
             <div className={`messages-component-container ${minimized === false ? "" : "minimized"}`}>
                 <div className="conversations-container">
-                    {messagesObject && conversationIds.length && <Conversations conversationIds={conversationIds} messagesObject={messagesObject} />}
+                    {connections && messagesObject && <Conversations approvedConnections={approvedConnections} conversationIds={conversationIds} messagesObject={messagesObject} />}
                 </div>
                 <div className="texts-container">
                     {activeTexts.length > 0 && <TextMessages activeTexts={activeTexts} userId={userId} recipientId={activeRecipientId} />}

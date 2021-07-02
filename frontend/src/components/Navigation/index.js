@@ -4,7 +4,8 @@ import {useSelector, useDispatch} from 'react-redux';
 import ProfileButton from './ProfileButton';
 import SearchBar from './SearchBar';
 
-import { getMessagesForUser } from '../../store/messages'
+import { getMessagesForUser, setMessagesNeedsRefreshState } from '../../store/messages'
+import { getConnectionsForUser, setConnectionsNeedsRefreshState } from '../../store/connections';
 
 
 const Navigation = ({ isLoaded }) => {
@@ -12,9 +13,18 @@ const Navigation = ({ isLoaded }) => {
 
 
     const currentUser = useSelector(state => state.session.user);
-
+    const connectionsNeedRefresh = useSelector(state => state.userConnections.needsRefresh)
+    const messagesNeedRefresh = useSelector(state => state.userMessages.needsRefresh)
     if (currentUser) {
-        dispatch(getMessagesForUser(currentUser.id))
+        if (connectionsNeedRefresh) {
+            dispatch(setConnectionsNeedsRefreshState(false))
+            dispatch(getConnectionsForUser(currentUser.id))
+        }
+
+        if (messagesNeedRefresh) {
+            dispatch(setMessagesNeedsRefreshState(false))
+            dispatch(getMessagesForUser(currentUser.id))
+        }
     }
 
     let navBarLinks;

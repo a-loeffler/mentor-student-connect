@@ -1,12 +1,14 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 import TextBubble from './TextBubble';
-import { postNewMessage } from '../../store/messages';
+import { postNewMessage, setMessagesNeedsRefreshState } from '../../store/messages';
 
 
 const TextMessages = ({activeTexts, userId, recipientId}) => {
     const dispatch = useDispatch()
+
+    const needMessageRefresh = useSelector(state => state.userMessages.needsRefresh)
 
     const [messageText, setMessageText] = useState("")
 
@@ -16,6 +18,7 @@ const TextMessages = ({activeTexts, userId, recipientId}) => {
             const contents = messageText;
 
             dispatch(postNewMessage(userId, recipientId, contents))
+            dispatch(setMessagesNeedsRefreshState(true))
 
             setMessageText("");
         }
