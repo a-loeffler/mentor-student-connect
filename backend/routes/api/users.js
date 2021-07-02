@@ -100,9 +100,8 @@ router.post('/:userId(\\d+)/messages/:recipientId(\\d+)', asyncHandler(async (re
     order: ['id']
   })
 
-  console.log(conversation)
 
-  return res.json(`${contents}`)
+  return res.json({conversation})
 }))
 
 module.exports = router;
