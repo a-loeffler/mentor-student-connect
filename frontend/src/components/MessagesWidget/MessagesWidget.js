@@ -85,7 +85,7 @@ const MessagesWidget = () => {
             </div>
             <div className={`messages-component-container ${minimized === false ? "" : "minimized"}`}>
                 <div className="conversations-container">
-                    <Conversations conversationIds={conversationIds} messagesObject={messagesObject} />
+                    {messagesObject && conversationIds.length && <Conversations conversationIds={conversationIds} messagesObject={messagesObject} />}
                 </div>
                 <div className="texts-container">
                     {activeTexts.length > 0 && <TextMessages activeTexts={activeTexts} userId={userId} recipientId={activeRecipientId} />}
