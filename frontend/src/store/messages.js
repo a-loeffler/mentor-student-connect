@@ -1,7 +1,9 @@
 import { csrfFetch } from './csrf'
 
 const GET_MESSAGES = "messages/get";
-const POST_MESSAGE = "messages/post"
+const POST_MESSAGE = "messages/post";
+const SET_REFRESH = "messages/refresh";
+const SET_ACTIVE_MESSAGES = "messages/setActive"
 
 
 const getMessages = (messages, userId) => {
@@ -15,6 +17,20 @@ const postMessage = (recipientId, conversation) => {
     return {
         type: POST_MESSAGE,
         payload: { recipientId, conversation}
+    }
+}
+
+const refreshMessages = (refreshValue) => {
+    return {
+        type: SET_REFRESH,
+        payload: refreshValue
+    }
+}
+
+const setActiveMessagesId = (recipientId) => {
+    return {
+        type: SET_ACTIVE_MESSAGES,
+        payload: recipientId
     }
 }
 
@@ -38,45 +54,73 @@ export const postNewMessage = (userId, recipientId, contents) => async(dispatch)
     })
     const data = await response.json()
     //expect back the full list of messages that match the recipientId
-    dispatch(postMessage(recipientId, data))
+    dispatch(postMessage(recipientId, data.conversation))
 
 }
 
 
-const initialState = {}
+export const setMessagesNeedsRefreshState = (refreshValue) => async(dispatch) => {
+    dispatch(refreshMessages(refreshValue))
+}
+
+
+export const setIdForActiveMessages = (recipientId) => async(dispatch) => {
+    dispatch(setActiveMessagesId(recipientId))
+}
+
+
+const initialState = {allMessages: {}, needsRefresh: true, activeMessagesId: null}
 
 const messagesReducer = (state = initialState, action) => {
     switch (action.type) {
         case GET_MESSAGES: {
-            let newState = {};
+            let newState = {...state};
             let messages = action.payload.messages; //an array of message objects
 
             let userId = action.payload.userId;
 
+            let newAllMessages = {};
+
             messages.forEach(message => {
                 if (message.sender_id === userId) {
-                    if (newState[message.recipient_id]) {
-                        newState[message.recipient_id].push(message);
+                    if (newAllMessages[message.recipient_id]) {
+                        newAllMessages[message.recipient_id].push(message);
                     } else {
-                        newState[message.recipient_id] = [message]
+                        newAllMessages[message.recipient_id] = [message]
                     }
                 }
                 if (message.recipient_id === userId) {
-                    if (newState[message.sender_id]) {
-                        newState[message.sender_id].push(message);
+                    if (newAllMessages[message.sender_id]) {
+                        newAllMessages[message.sender_id].push(message);
                     } else {
-                        newState[message.sender_id] = [message]
+                        newAllMessages[message.sender_id] = [message]
                     }
                 }
 
             })
+
+            newState.allMessages = newAllMessages;
 
             return newState;
         }
         case POST_MESSAGE: {
             let newState = {...state}
             let recipientId = action.payload.recipientId;
-            newState[recipientId] = action.payload.conversation;
+            newState.allMessages[recipientId] = action.payload.conversation;
+            return newState;
+        }
+        case SET_REFRESH: {
+            let newState = {...state};
+            let refreshValue = action.payload;
+            newState.needsRefresh = refreshValue;
+
+            return newState;
+        }
+        case SET_ACTIVE_MESSAGES: {
+            let newState = {...state};
+            let recipientId = action.payload;
+            newState.activeMessagesId = recipientId;
+
             return newState;
         }
         default: {
