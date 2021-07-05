@@ -3,6 +3,7 @@ import { csrfFetch } from './csrf'
 const GET_MESSAGES = "messages/get";
 const POST_MESSAGE = "messages/post";
 const SET_REFRESH = "messages/refresh";
+const SET_ACTIVE_MESSAGES = "messages/setActive"
 
 
 const getMessages = (messages, userId) => {
@@ -26,6 +27,13 @@ const refreshMessages = (refreshValue) => {
     }
 }
 
+const setActiveMessagesId = (recipientId) => {
+    return {
+        type: SET_ACTIVE_MESSAGES,
+        payload: recipientId
+    }
+}
+
 
 export const getMessagesForUser = (userId) => async(dispatch) => {
     const response = await fetch(`/api/users/${userId}/messages`)
@@ -46,7 +54,7 @@ export const postNewMessage = (userId, recipientId, contents) => async(dispatch)
     })
     const data = await response.json()
     //expect back the full list of messages that match the recipientId
-    dispatch(postMessage(recipientId, data))
+    dispatch(postMessage(recipientId, data.conversation))
 
 }
 
@@ -55,7 +63,13 @@ export const setMessagesNeedsRefreshState = (refreshValue) => async(dispatch) =>
     dispatch(refreshMessages(refreshValue))
 }
 
-const initialState = {allMessages: {}, needsRefresh: true}
+
+export const setIdForActiveMessages = (recipientId) => async(dispatch) => {
+    dispatch(setActiveMessagesId(recipientId))
+}
+
+
+const initialState = {allMessages: {}, needsRefresh: true, activeMessagesId: null}
 
 const messagesReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -99,6 +113,13 @@ const messagesReducer = (state = initialState, action) => {
             let newState = {...state};
             let refreshValue = action.payload;
             newState.needsRefresh = refreshValue;
+
+            return newState;
+        }
+        case SET_ACTIVE_MESSAGES: {
+            let newState = {...state};
+            let recipientId = action.payload;
+            newState.activeMessagesId = recipientId;
 
             return newState;
         }

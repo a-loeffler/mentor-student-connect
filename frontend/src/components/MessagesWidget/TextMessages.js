@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import TextBubble from './TextBubble';
@@ -11,6 +11,10 @@ const TextMessages = ({activeTexts, userId, recipientId}) => {
     const needMessageRefresh = useSelector(state => state.userMessages.needsRefresh)
 
     const [messageText, setMessageText] = useState("")
+
+    useEffect(() => {
+
+    }, [dispatch])
 
     const sendText = (e) => {
         e.preventDefault();

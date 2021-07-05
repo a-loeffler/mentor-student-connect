@@ -1,3 +1,6 @@
+import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+
 import ConversationListItem from './ConversationListItem'
 
 
@@ -5,6 +8,18 @@ import ConversationListItem from './ConversationListItem'
 
 const Conversations = ({conversationIds, messagesObject, approvedConnections}) => {
 
+    const needMessageRefresh = useSelector(state => state.userMessages.needsRefresh)
+
+    const [refresh, setRefresh] = useState(false)
+    const [currentMessages, setCurrentMessages] = useState({});
+
+    useEffect(() => {
+
+        setRefresh(needMessageRefresh)
+
+        setCurrentMessages(messagesObject)
+
+    }, [needMessageRefresh, messagesObject])
 
     //to-do: figure out logic for unread notices
         //do we need to pass down the messagesObject?
@@ -16,18 +31,27 @@ const Conversations = ({conversationIds, messagesObject, approvedConnections}) =
 
     //approvedConnections[index].User.first_name, last_name
 
-    const nameFinder = (id) => {
+    // const nameFinder = (id) => {
 
-        console.log(id)
-        //search through approvedConnections to filter out the entry
-            //with a mentor_id or student_id that matches the id
-        console.log("approved connections**", approvedConnections)
-        let [individualConnection] = approvedConnections.filter(connection => connection.mentor_id === Number(id) || connection.student_id === Number(id))
-        console.log("individual connection**", individualConnection)
-        //return the entry's User.first_name and User.last_name in the
-            //desired format
+    //     // console.log(id)
+    //     //search through approvedConnections to filter out the entry
+    //         //with a mentor_id or student_id that matches the id
+    //     // console.log("approved connections**", approvedConnections)
+    //     // let [individualConnection] = approvedConnections.filter(connection => connection.mentor_id === Number(id) || connection.student_id === Number(id))
+    //     // console.log("individual connection**", individualConnection)
+    //     //return the entry's User.first_name and User.last_name in the
+    //         //desired format
 
-        return `${individualConnection.User.first_name} ${individualConnection.User.last_name[0]}.`
+    //     return `${individualConnection.User.first_name} ${individualConnection.User.last_name[0]}.`
+    // }
+
+
+    console.log(messagesObject)
+
+    const unreadChecker = (otherId) => {
+        console.log(otherId)
+        console.log(messagesObject)
+        return currentMessages[otherId].some(message => message.read === false)
     }
 
 
@@ -41,13 +65,13 @@ const Conversations = ({conversationIds, messagesObject, approvedConnections}) =
             <div className={`conversation-list-title gold`} >
                 <h3 className="conversation-list-text">Connections</h3>
             </div>
-            {conversationIds.length && conversationIds.map((id, index) => <ConversationListItem
-                                                    key={index}
-                                                    unread={messagesObject && messagesObject[id].some(message => message.read === false)} //true if there's an unread msg
-                                                    text={nameFinder(id)}
-                                                    itemId={`conversation-${index % 2 === 0 ? "chocolate" : "brick"}-${id}`} //use this for event listener on click later
-                                                    color={index % 2 === 0 ? "chocolate" : "brick"}
-                                                    />)}
+            {approvedConnections.map((connection, index) => <ConversationListItem
+                                                                                    key={index}
+                                                                                    unread={true}
+                                                                                    text={`${connection.OtherUserInfo.first_name} ${connection.OtherUserInfo.last_name[0]}.`}
+                                                                                    itemId={`conversation-${index % 2 === 0 ? "chocolate" : "brick"}-${connection.OtherUserInfo.id}`}
+                                                                                    color={index % 2 === 0 ? "chocolate" : "brick"}
+                                                                                    />)}
         </div>
     )
 }

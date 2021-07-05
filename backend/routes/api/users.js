@@ -106,7 +106,7 @@ router.post('/:userId(\\d+)/messages/:recipientId(\\d+)', asyncHandler(async (re
 
 
 router.get('/:userId(\\d+)/connections', asyncHandler(async (req, res) => {
-  const userId = req.params.userId;
+  const userId = parseInt(req.params.userId, 10);
 
   //Begin Query
   const connections = await Connection.findAll(
@@ -114,23 +114,63 @@ router.get('/:userId(\\d+)/connections', asyncHandler(async (req, res) => {
       where: {
         [Op.or]: [{student_id: userId}, {mentor_id: userId}]
       },
-      include: [
-        {
-          model: User,
-          // where: {
-          //   [Op.or]: [{id: Sequelize.col('Connection.student_id')}, {id: Sequelize.col('Connection.mentor_id')}]
-          // },
-          // where: {
-          //   [Op.or]: []
-          // }
-          attributes: ['first_name', 'last_name']
-        }
-      ]
+      // include: [
+      //   {
+      //     model: User,
+      //     // where: {
+      //     //   [Op.or]: [{id: Sequelize.col('Connection.student_id')}, {id: Sequelize.col('Connection.mentor_id')}]
+      //     // },
+      //     // where: {
+      //     //   [Op.or]: []
+      //     // }
+      //     attributes: ['first_name', 'last_name']
+      //   }
+      // ]
     }
   )
 
-  console.log(connections)
+  const otherUsers = []
 
+  connections.forEach(connection => {
+    if (connection.dataValues.student_id === userId) {
+      otherUsers.push(connection.dataValues.mentor_id)
+    }
+
+    if (connection.dataValues.mentor_id === userId) {
+      otherUsers.push(connection.dataValues.student_id)
+    }
+
+  })
+
+  console.log(otherUsers)
+
+  for (let i = 0; i < otherUsers.length; i++) {
+    let otherUserId = otherUsers[i];
+
+    let userInfo = await User.findByPk(otherUserId,
+        {
+          attributes: ['id', 'first_name', 'last_name']
+        }
+      )
+
+    connections[i].dataValues.OtherUserInfo = {id: userInfo.dataValues.id, first_name: userInfo.dataValues.first_name, last_name: userInfo.dataValues.last_name}
+  }
+
+  // otherUsers.forEach((otherUserId, index) => {
+  //   userInfo = await Connection.findAll(
+  //     {
+  //       where: {
+  //         id: otherUserId
+  //       },
+  //       attributes: [id, first_name, last_name]
+  //     }
+  //     )
+
+  //   connections[index].dataValues.UserInfo = {id: userInfo.dataValues.id, first_name: userInfo.dataValues.first_name, last_name: userInfo.dataValues.last_name}
+  // })
+
+
+  console.log("*** Did it work? ***", connections)
   return res.json({connections})
 }))
 
