@@ -9,6 +9,7 @@ import LoginFormPage from './components/LoginFormPage';
 import SignUpFormPage from './components/SignUpFormPage';
 import Navigation from './components/Navigation';
 import MessagesWidget from './components/MessagesWidget';
+import Navbar from './components/Navigation/Navbar';
 
 function App() {
   const dispatch = useDispatch()
@@ -32,6 +33,9 @@ function App() {
         </Route>
         <Route path="/messages">
           <MessagesWidget />
+        </Route>
+        <Route path="/navbar">
+          <Navbar />
         </Route>
       </Switch>
     </>

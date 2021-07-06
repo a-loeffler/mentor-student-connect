@@ -1,0 +1,236 @@
+.navbar-container {
+    display: grid;
+    grid-template-columns: 10% 1fr 10%;
+    grid-template-rows: 100px;
+    background-color: #005467;
+    border-bottom: 3px solid #453936;
+}
+
+.navbar-main {
+    display: grid;
+    grid-template-columns: 2fr 6fr 1fr;
+}
+
+.navbar-title-space {
+    display: grid;
+    grid-template-columns: min-content max-content;
+}
+
+.navbar-title-image-container {
+    display: flex;
+    align-items: center;
+}
+
+.navbar-title-logo {
+    height: 90px;
+    width: auto;
+    box-shadow: 0px 0px 3px 3px #0000006c;
+    cursor: pointer;
+    position: relative;
+}
+
+.navbar-title-logo:hover {
+    animation: darken 0.2s forwards;
+    height: 89px;
+    width: auto;
+    right: 0px;
+}
+
+@keyframes darken {
+    100% {
+        filter:brightness(75%);
+    }
+}
+
+.navbar-title-text-container {
+    padding-top: 20px;
+    padding-left: 10px;
+}
+
+.navbar-title {
+    font-size: 22px;
+    font-weight: 800;
+    color: #E0AA4E;
+    text-shadow: 0px 3px 3px #0000009f;
+}
+
+.navbar-subtitle {
+    font-size: 14px;
+    color: #ffffff;
+}
+
+.navbar-menu-items-list {
+    display: flex;
+    justify-content: space-evenly;
+    list-style: none;
+
+}
+
+.navbar-menu-items-list-item {
+    padding-top: 40px;
+}
+
+.navbar-menu-link-text {
+    color: #E0AA4E;
+    font-size: 16px;
+}
+
+.navbar-menu-link-text:hover {
+    color: #ffffff;
+    cursor: pointer;
+}
+
+.navbar-menu-items-button-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-top: 34px;
+    position: relative;
+}
+
+.navbar-menu-login-button {
+    background-color: #4473C4;
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    height: 30px;
+    width: 100px;
+    font-size: 14px;
+    position: relative;
+}
+
+.navbar-menu-login-button:hover {
+    background-color: #002F3A;
+    cursor: pointer;
+    top: 2px;
+}
+
+.dark-blue {
+    background-color: #002F3A;
+}
+
+.login-modal-container {
+    position: absolute;
+    height: 140px;
+    bottom: -150px;
+    width: 320px;
+    z-index: 2;
+    background-color: #4472C4;
+    box-shadow: 0px 3px 5px #0000009f;
+}
+
+.login-form {
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-right: 20px;
+    margin-bottom: 10px;
+}
+
+.login-field {
+    display: grid;
+    grid-template-columns: 45% 55%;
+    grid-column-gap: 5px;
+    margin-bottom: 5px;
+}
+
+.login-field-label {
+    color: #ffffff;
+    font-size: 14px;
+    text-align: right;
+    padding-top: 5px;
+}
+
+.login-field-input {
+    border: 1px solid #000000;
+    height: 24px;
+}
+
+.login-submit-button {
+    color: #ffffff;
+    background-color: #005467;
+    border: 1px solid #000000;
+    height: 30px;
+    position: relative;
+}
+
+.login-submit-button:hover {
+    top: 2px;
+    background-color: #002F3A;
+}
+
+
+.login-signup-redirect {
+    position: relative;
+}
+
+.login-signup-redirect-text {
+    color: #ffffff;
+    font-size: 14px;
+    /* margin-top: 10px; */
+    font-weight: normal;
+    position: absolute;
+    bottom: -28px;
+}
+
+.login-signup-redirect-link {
+    color: #6EC1E4;
+    font-weight: bold;
+}
+
+.login-signup-redirect-link:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.form-error-list {
+    font-size: 9px;
+    margin-left: 5px;
+    padding: 0;
+    color: red;
+
+}
+
+.profile-items {
+    display: flex;
+    align-items: center;
+    padding-top: 25px;
+    position: relative;
+}
+
+.profile-icon-container {
+    background-color: #4472C4;
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 10px;
+}
+
+.navbar-menu-profile-name {
+    color: #ffffff;
+    font-size: 14px;
+    margin-right: 10px;
+}
+
+.new-message-notification {
+    position: absolute;
+    right: -4px;
+    top: 35px;
+    width: 12px;
+    height: 11px;
+    font-size: 10px;
+    background: #E0AA4E;
+    text-align: center;
+    box-shadow: 0px 1px 1px 1px #0000006c;
+    z-index: 2;
+}
+
+.profile-messages-icon {
+    width: 40px;
+}
+
+.profile-messages-icon:hover {
+    filter: brightness(75%);
+}
