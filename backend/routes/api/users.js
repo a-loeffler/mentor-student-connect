@@ -142,7 +142,7 @@ router.get('/:userId(\\d+)/connections', asyncHandler(async (req, res) => {
 
   })
 
-  console.log(otherUsers)
+  
 
   for (let i = 0; i < otherUsers.length; i++) {
     let otherUserId = otherUsers[i];
@@ -170,7 +170,7 @@ router.get('/:userId(\\d+)/connections', asyncHandler(async (req, res) => {
   // })
 
 
-  console.log("*** Did it work? ***", connections)
+
   return res.json({connections})
 }))
 
