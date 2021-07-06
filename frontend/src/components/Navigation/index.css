@@ -8,7 +8,7 @@
 
 .navbar-main {
     display: grid;
-    grid-template-columns: 2fr 6fr 1fr;
+    grid-template-columns: 2fr 6fr;
 }
 
 .navbar-title-space {
@@ -109,6 +109,7 @@
     background-color: #002F3A;
 }
 
+.get-involved-menu-container,
 .profile-modal-container,
 .login-modal-container {
     position: absolute;
@@ -120,10 +121,15 @@
     box-shadow: 0px 3px 5px #0000009f;
 }
 
+.get-involved-menu-container,
 .profile-modal-container {
     width: max-content;
     height: max-content;
     bottom: -160px;
+}
+
+.get-involved-items {
+    position: relative;
 }
 
 .login-form {
@@ -250,6 +256,7 @@
     filter: brightness(75%);
 }
 
+.get-involved-menu-list,
 .profile-menu-list {
     font-size: 16px;
     color: #ffffff;
@@ -257,11 +264,12 @@
 
 }
 
-
+.get-involved-menu-list-item,
 .profile-menu-list-item {
     padding: 10px;
 }
 
+.get-involved-menu-list-item:hover,
 .profile-menu-list-item:hover {
     background-color: #2f528d;
     cursor: pointer;
@@ -273,4 +281,14 @@
 
 .log-out-item:hover {
     background-color: #162642;
+}
+
+.point-down::after {
+    content: " ▼";
+    font-size: 12px;
+}
+
+.point-up::after {
+    content: " ▲";
+    font-size: 12px;
 }

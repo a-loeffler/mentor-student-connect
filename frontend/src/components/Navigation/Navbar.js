@@ -1,10 +1,11 @@
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 
 import LoginModal from "./LoginModal";
 import ProfileModal from "./ProfileModal";
+import GetInvolvedModal from "./GetInvolvedModal";
 
 import "./index.css";
 
@@ -17,8 +18,10 @@ const Navbar = () => {
 
     const [loginModalShowing, setLoginModalShowing] = useState(false);
     const [profileModalShowing, setProfileModalShowing] = useState(false);
-    const currentUser = useSelector(state => state.session.user);
+    const [getInvolvedModalShowing, setGetInvolvedModalShowing] = useState(false);
+    const [clickedOutside, setClickedOutside] = useState(false);
 
+    const currentUser = useSelector(state => state.session.user);
 
 
     const clickLogin = (e) => {
@@ -49,13 +52,35 @@ const Navbar = () => {
         history.push("/messages")
     }
 
+    const clickHome = (e) => {
+        e.preventDefault();
+
+        history.push("/")
+    }
+
+    const clickGetInvolved = (e) => {
+        e.preventDefault();
+
+        if (e.target.classList.contains("point-down")){
+            e.target.classList.remove("point-down")
+            e.target.classList.add("point-up")
+        } else {
+            e.target.classList.remove("point-up")
+            e.target.classList.add("point-down")
+        }
+
+        setGetInvolvedModalShowing(!getInvolvedModalShowing)
+
+
+    }
+
     return (
         <div className="navbar-container">
             <div className="navbar-sidespace"></div>
             <div className="navbar-main">
                 <div className="navbar-title-space">
                     <div className="navbar-title-image-container">
-                        <img className="navbar-title-logo" src="/images/MSClogo1.svg" alt="Mentor Student Connect"></img>
+                        <img className="navbar-title-logo" src="/images/MSClogo1.svg" alt="Mentor Student Connect" onClick={e => clickHome(e)}></img>
                     </div>
                     <div className="navbar-title-text-container">
                         <h1 className="navbar-title">Mentor Student Connect</h1>
@@ -65,10 +90,11 @@ const Navbar = () => {
                 <div className="navbar-menu-items">
                     <ul className="navbar-menu-items-list">
                         <li className="navbar-menu-items-list-item">
-                            <h1 className="navbar-menu-link-text">Home</h1>
+                            <h1 className="navbar-menu-link-text" onClick={e => clickHome(e)}>Home</h1>
                         </li>
-                        <li className="navbar-menu-items-list-item">
-                            <h1 className="navbar-menu-link-text">Get Involved</h1>
+                        <li className="navbar-menu-items-list-item get-involved-items">
+                            <h1 className="navbar-menu-link-text point-down" onClick={e => clickGetInvolved(e)} >Get Involved</h1>
+                            {getInvolvedModalShowing && <GetInvolvedModal />}
                         </li>
                         <li className="navbar-menu-items-list-item">
                             <h1 className="navbar-menu-link-text">News and Events</h1>
