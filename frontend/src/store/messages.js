@@ -104,9 +104,9 @@ const messagesReducer = (state = initialState, action) => {
             return newState;
         }
         case POST_MESSAGE: {
-            let newState = {...state}
+            let newState = Object.assign({}, state)
             let recipientId = action.payload.recipientId;
-            newState.allMessages[recipientId] = action.payload.conversation;
+            newState.allMessages[recipientId].push(action.payload.conversation[action.payload.conversation.length - 1]);
             return newState;
         }
         case SET_REFRESH: {
