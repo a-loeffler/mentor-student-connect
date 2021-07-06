@@ -1,15 +1,22 @@
 
 import { useState } from "react";
 import { useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 
 import LoginModal from "./LoginModal";
+import ProfileModal from "./ProfileModal";
 
 import "./index.css";
 
 
+
+
 const Navbar = () => {
 
+    const history = useHistory();
+
     const [loginModalShowing, setLoginModalShowing] = useState(false);
+    const [profileModalShowing, setProfileModalShowing] = useState(false);
     const currentUser = useSelector(state => state.session.user);
 
 
@@ -23,6 +30,23 @@ const Navbar = () => {
             e.target.classList.add("dark-blue")
         }
         setLoginModalShowing(!loginModalShowing)
+    }
+
+    const clickProfile = (e) => {
+        e.preventDefault();
+
+        if (e.target.classList.contains("white-border")){
+            e.target.classList.remove("white-border")
+        } else {
+            e.target.classList.add("white-border")
+        }
+        setProfileModalShowing(!profileModalShowing)
+    }
+
+    const clickMessages = (e) => {
+        e.preventDefault();
+
+        history.push("/messages")
     }
 
     return (
@@ -57,12 +81,13 @@ const Navbar = () => {
                             {loginModalShowing && <LoginModal />}
                         </li>}
                         {currentUser && <li className="navbar-menu-items-list-item profile-items">
-                            <div className="profile-icon-container">
+                            <div className="profile-icon-container" onClick={e => clickProfile(e)}>
                                 <img className="profile-icon" src="/images/profile.svg" alt=""></img>
                             </div>
+                            {profileModalShowing && <ProfileModal />}
                             <h1 className="navbar-menu-profile-name">{`Welcome, ${currentUser.username}`}</h1>
                             <div className="new-message-notification">!</div>
-                            <img className="profile-messages-icon" src="/images/envelope.svg" alt="click here to see your messages"></img>
+                            <img className="profile-messages-icon" src="/images/envelope.svg" alt="click here to see your messages" onClick={e => clickMessages(e)}></img>
                         </li>}
                     </ul>
                 </div>

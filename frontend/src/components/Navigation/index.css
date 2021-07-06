@@ -109,6 +109,7 @@
     background-color: #002F3A;
 }
 
+.profile-modal-container,
 .login-modal-container {
     position: absolute;
     height: 140px;
@@ -117,6 +118,12 @@
     z-index: 2;
     background-color: #4472C4;
     box-shadow: 0px 3px 5px #0000009f;
+}
+
+.profile-modal-container {
+    width: max-content;
+    height: max-content;
+    bottom: -160px;
 }
 
 .login-form {
@@ -208,6 +215,14 @@
     margin-right: 10px;
 }
 
+.profile-icon-container:hover {
+    border: 2px solid #ffffff;
+}
+
+.white-border {
+    border: 2px solid #ffffff;
+}
+
 .navbar-menu-profile-name {
     color: #ffffff;
     font-size: 14px;
@@ -233,4 +248,29 @@
 
 .profile-messages-icon:hover {
     filter: brightness(75%);
+}
+
+.profile-menu-list {
+    font-size: 16px;
+    color: #ffffff;
+    list-style: none;
+
+}
+
+
+.profile-menu-list-item {
+    padding: 10px;
+}
+
+.profile-menu-list-item:hover {
+    background-color: #2f528d;
+    cursor: pointer;
+}
+
+.log-out-item {
+    background-color: #1d3358;
+}
+
+.log-out-item:hover {
+    background-color: #162642;
 }
