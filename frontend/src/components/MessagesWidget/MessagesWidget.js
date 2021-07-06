@@ -52,6 +52,7 @@ const MessagesWidget = () => {
                             e.target.id = "showing-now";
                             setActiveRecipentId(convoId)
                             setActiveTexts(messagesObject[convoId])
+                            console.log("test- messagesObject line 55", activeTexts)
 
                             let lastMessage = document.querySelector(".last")
                             if (lastMessage) {
@@ -66,8 +67,6 @@ const MessagesWidget = () => {
                 })
             })
         }
-
-
 
     }, [messagesObject, activeTexts, minimized, user, connections])
 
@@ -101,7 +100,7 @@ const MessagesWidget = () => {
                     {messagesObject && <Conversations approvedConnections={approvedConnections} conversationIds={conversationIds} messagesObject={messagesObject} />}
                 </div>
                 <div className="texts-container">
-                    {activeTexts.length > 0 && <TextMessages activeTexts={activeTexts} userId={userId} recipientId={activeRecipientId} />}
+                    {<TextMessages activeTexts={activeTexts} userId={userId} recipientId={activeRecipientId} />}
                 </div>
             </div>
         </div>

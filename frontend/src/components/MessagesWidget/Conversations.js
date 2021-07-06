@@ -10,12 +10,11 @@ const Conversations = ({conversationIds, messagesObject, approvedConnections}) =
 
     const needMessageRefresh = useSelector(state => state.userMessages.needsRefresh)
 
-    const [refresh, setRefresh] = useState(false)
+
     const [currentMessages, setCurrentMessages] = useState({});
 
     useEffect(() => {
 
-        setRefresh(needMessageRefresh)
 
         setCurrentMessages(messagesObject)
 

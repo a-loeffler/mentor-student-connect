@@ -8,13 +8,14 @@ import { postNewMessage, setMessagesNeedsRefreshState } from '../../store/messag
 const TextMessages = ({activeTexts, userId, recipientId}) => {
     const dispatch = useDispatch()
 
-    const needMessageRefresh = useSelector(state => state.userMessages.needsRefresh)
+    // const needMessageRefresh = useSelector(state => state.userMessages.needsRefresh)
 
     const [messageText, setMessageText] = useState("")
+    const [refreshNow, setRefreshNow] = useState(false);
 
     useEffect(() => {
-
-    }, [dispatch])
+        console.log("refresh", refreshNow)
+    }, [dispatch, refreshNow])
 
     const sendText = (e) => {
         e.preventDefault();
@@ -22,23 +23,30 @@ const TextMessages = ({activeTexts, userId, recipientId}) => {
             const contents = messageText;
 
             dispatch(postNewMessage(userId, recipientId, contents))
-            dispatch(setMessagesNeedsRefreshState(true))
+            // dispatch(setMessagesNeedsRefreshState(true))
+                // .then(() => setRefreshNow(!refreshNow))
+                .then(() => setMessageText(""))
 
-            setMessageText("");
+                console.log("after the post new message dispatch")
+
+            // setMessageText("");
         }
 
         //to-do: dispatch thunk to post to database; rerender current position with new text
     }
 
-
+    console.log("text messages render line 37")
     console.log("activeTexts", activeTexts)
     //to-do: get media for little icon boxes next to messages
     //to-do: display active character limit for text message at bottom
 
+
+    //ideas: make a little modal that will cover up unmounting/remounting?
+
     return (
         <div className="text-messages-container">
             <div className="text-bubbles-display-container">
-                {activeTexts.map((text, index) => <TextBubble
+                {activeTexts.length > 0 && activeTexts.map((text, index) => <TextBubble
                                                     key={index}
                                                     bubbleType={text.sender_id === userId ? "outgoing" : "incoming"}
                                                     contents={text.contents}
