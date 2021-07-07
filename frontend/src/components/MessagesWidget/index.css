@@ -1,3 +1,10 @@
+.messages-widget-layout {
+    display: grid;
+    grid-template-columns: 10% 1fr 10%;
+    grid-template-rows: 100vh;
+    background-color: #002F3A;
+}
+
 .incoming {
     background-color: #793C36;
     position: relative;
@@ -91,6 +98,7 @@
 .messages-widget-container {
     width: 60%;
     margin: auto;
+    margin-top: 20px;
     max-height: 500px;
 
 }
