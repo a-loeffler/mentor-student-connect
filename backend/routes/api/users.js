@@ -30,6 +30,16 @@ const validateSignup = [
       .exists({ checkFalsy: true })
       .isLength({ min: 6 })
       .withMessage('Password must be 6 characters or more.'),
+    check('first_name')
+      .exists({ checkFalsy: true })
+      .withMessage('Please provide your first name'),
+    check('last_name')
+      .exists({ checkFalsy: true })
+      .withMessage('Please provide your last name'),
+    check('zip_code')
+      .exists({ checkFalsy: true })
+      .isLength({ min: 5, max: 5 })
+      .withMessage('Please provide a 5-digit zip code for your primary residence'),
     handleValidationErrors,
 ];
 
@@ -37,8 +47,8 @@ const validateSignup = [
 //routing
 
 router.post('/', validateSignup, asyncHandler(async (req, res) => {
-    const { email, password, username } = req.body;
-    const user = await User.signup({ email, username, password });
+    const { username, first_name, last_name, email, password, zip_code, mentor, student } = req.body;
+    const user = await User.signup({ username, first_name, last_name, email, password, zip_code, mentor, student });
 
     await setTokenCookie(res, user);
 
@@ -142,7 +152,7 @@ router.get('/:userId(\\d+)/connections', asyncHandler(async (req, res) => {
 
   })
 
-  
+
 
   for (let i = 0; i < otherUsers.length; i++) {
     let otherUserId = otherUsers[i];

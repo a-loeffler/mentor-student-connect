@@ -19,9 +19,25 @@ const Navbar = () => {
     const [loginModalShowing, setLoginModalShowing] = useState(false);
     const [profileModalShowing, setProfileModalShowing] = useState(false);
     const [getInvolvedModalShowing, setGetInvolvedModalShowing] = useState(false);
-    const [clickedOutside, setClickedOutside] = useState(false);
+    // const [targetedItem, setTargetedItem] = useState(null);
 
     const currentUser = useSelector(state => state.session.user);
+
+
+    // useEffect(() => {
+
+    //     const clickOutside = (e) => {
+    //         if (!e.target.classList.contains("get-involved-menu-container")) {
+    //             setGetInvolvedModalShowing(false)
+    //         }
+    //     }
+
+    //     if (getInvolvedModalShowing || profileModalShowing || loginModalShowing) {
+    //         document.addEventListener("click", e => clickOutside(e))
+    //     } else {
+    //         document.removeEventListener("click", e => clickOutside(e))
+    //     }
+    // })
 
 
     const clickLogin = (e) => {
@@ -37,13 +53,14 @@ const Navbar = () => {
 
     const clickProfile = (e) => {
         e.preventDefault();
-
-        if (e.target.classList.contains("white-border")){
-            e.target.classList.remove("white-border")
-        } else {
-            e.target.classList.add("white-border")
+        if (!e.target.classList.contains("profile-icon")) {
+            if (e.target.classList.contains("white-border")){
+                e.target.classList.remove("white-border")
+            } else {
+                e.target.classList.add("white-border")
+            }
+            setProfileModalShowing(!profileModalShowing)
         }
-        setProfileModalShowing(!profileModalShowing)
     }
 
     const clickMessages = (e) => {
@@ -70,7 +87,7 @@ const Navbar = () => {
         }
 
         setGetInvolvedModalShowing(!getInvolvedModalShowing)
-
+        console.log(getInvolvedModalShowing)
 
     }
 
