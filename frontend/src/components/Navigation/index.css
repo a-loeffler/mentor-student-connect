@@ -116,7 +116,7 @@
     height: 140px;
     bottom: -150px;
     width: 320px;
-    z-index: 2;
+    z-index: 3;
     background-color: #4472C4;
     box-shadow: 0px 3px 5px #0000009f;
 }
@@ -291,4 +291,9 @@
 .point-up::after {
     content: " ▲";
     font-size: 12px;
+}
+
+.no-style {
+    text-decoration: none;
+    color: #ffffff;
 }

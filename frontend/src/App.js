@@ -9,7 +9,8 @@ import LoginFormPage from './components/LoginFormPage';
 import SignUpFormPage from './components/SignUpFormPage';
 import Navigation from './components/Navigation';
 import MessagesWidget from './components/MessagesWidget';
-import Navbar from './components/Navigation/Navbar';
+import CreateUserForm from './components/CreateUserForms/CreateUserForm';
+import SignUpMain from './components/SignupPages/SignupMain';
 
 function App() {
   const dispatch = useDispatch()
@@ -23,19 +24,18 @@ function App() {
   return isLoaded && (
     <>
       <Navigation isLoaded={isLoaded}/>
-      <h1>Hello from App</h1>
       <Switch>
         <Route path="/login">
           <LoginFormPage />
         </Route>
         <Route path="/signup">
-          <SignUpFormPage />
+          <SignUpMain />
         </Route>
         <Route path="/messages">
           <MessagesWidget />
         </Route>
-        <Route path="/navbar">
-          <Navbar />
+        <Route path="/form">
+          <CreateUserForm title={"Sign Up as a Student"} mentor={false} student={true} />
         </Route>
       </Switch>
     </>

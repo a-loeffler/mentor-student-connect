@@ -90,19 +90,23 @@ const MessagesWidget = () => {
         //thunk action to set the message to "read" being true
 
     return (
-        <div className="messages-widget-container">
-            <div className={`widget-action-bar ${minimized === false ? "" : "full-border"}`}>
-                {`${minimized === false ? "": "Conversations"}`}
-                <button className="widget-collapse-button" onClick={e => minimizeActions(e)}>-</button>
-            </div>
-            <div className={`messages-component-container ${minimized === false ? "" : "minimized"}`}>
-                <div className="conversations-container">
-                    {messagesObject && <Conversations approvedConnections={approvedConnections} conversationIds={conversationIds} messagesObject={messagesObject} />}
+        <div className="messages-widget-layout">
+            <div className="messages-widget-sidespace"></div>
+            <div className="messages-widget-container">
+                <div className={`widget-action-bar ${minimized === false ? "" : "full-border"}`}>
+                    {`${minimized === false ? "": "Conversations"}`}
+                    <button className="widget-collapse-button" onClick={e => minimizeActions(e)}>-</button>
                 </div>
-                <div className="texts-container">
-                    {<TextMessages activeTexts={activeTexts} userId={userId} recipientId={activeRecipientId} />}
+                <div className={`messages-component-container ${minimized === false ? "" : "minimized"}`}>
+                    <div className="conversations-container">
+                        {messagesObject && <Conversations approvedConnections={approvedConnections} conversationIds={conversationIds} messagesObject={messagesObject} />}
+                    </div>
+                    <div className="texts-container">
+                        {<TextMessages activeTexts={activeTexts} userId={userId} recipientId={activeRecipientId} />}
+                    </div>
                 </div>
             </div>
+            <div className="messages-widget-sidespace"></div>
         </div>
     )
 
