@@ -25,24 +25,22 @@ const Navbar = () => {
 
     useEffect(() => {
         document.addEventListener("click", e => {
-            console.log("in here!", e.target)
-
-
+            
             const involvedClassNames = ["get-involved-menu-container", "get-involved-menu-list", "get-involved"]
             if (!involvedClassNames.some(className => e.target.classList.contains(className))) {
-                console.log("made it here")
+
                 setGetInvolvedModalShowing(false);
             }
 
             const loginClassNames = ["navbar-menu-login-button", "login-modal-container", "login-form", "login-field", "login-field-input", "form-errors", "form-error-list", "form-error-list-item", "login-submit-button", "login-signup-redirect", "login-signup-redirect-text"]
             if (!loginClassNames.some(className => e.target.classList.contains(className))) {
-                console.log("made it here")
+
                 setLoginModalShowing(false);
             }
 
             const profileClassNames = ["profile-items", "profile-icon-container", "profile-icon", "profile-modal-container", "profile-menu-list", "profile-menu-list-item"]
             if (!profileClassNames.some(className => e.target.classList.contains(className))) {
-                console.log("made it here")
+
                 setProfileModalShowing(false);
             }
         })
@@ -81,7 +79,7 @@ const Navbar = () => {
 
 
     const clickLogin = (e) => {
-      
+
         setLoginModalShowing(!loginModalShowing)
     }
 

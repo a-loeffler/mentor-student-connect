@@ -1,0 +1,77 @@
+.user-page-container {
+    display: grid;
+    grid-template-columns: 500px 1fr;
+    grid-template-rows: 100vh;
+    grid-auto-flow: columns;
+}
+
+.corner-container {
+    background-color: #002F3A;
+    height: 100%;
+    width: 100%;
+    position: relative;
+}
+
+.corner-background {
+    width: 500px;
+    height: 500px;
+    background: linear-gradient(to bottom right, #005467, #6EC1E499 30%, #E0AA4E 40%, transparent 49%);
+}
+
+.corner-profile-image-container {
+    position: absolute;
+    background-color: #4472C4;
+    border: 5px solid #FFFFFF;
+    border-radius: 50%;
+    height: 200px;
+    width: 200px;
+    top: 120px;
+    left: 120px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.corner-profile-image {
+    height: 70%;
+    width: auto;
+}
+
+.corner-profile-info-container {
+    position: absolute;
+    max-width: 400px;
+    top: 330px;
+    left: 120px;
+    font-family: Arial;
+}
+
+.corner-profile-info-name {
+    color: #E0AA4E;
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.corner-profile-info-data {
+    color: #ffffff;
+    font-size: 16px;
+    margin-bottom: 5px;
+
+}
+
+.edit-settings {
+    text-align: right;
+    color: #6EC1E4;
+    padding-top: 10px;
+    text-decoration: none;
+}
+
+.edit-settings:hover {
+    text-decoration: underline;
+}
+
+
+.user-page-widgets-container {
+    background-color: green;
+}
