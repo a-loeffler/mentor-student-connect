@@ -3,6 +3,7 @@
 const express = require('express');
 const asyncHandler = require('express-async-handler');
 const { Sequelize, Op } = require('sequelize');
+const bcrypt = require('bcryptjs');
 
 const { setTokenCookie, requireAuth } = require('../../utils/auth');
 const { User, Message, Connection } = require('../../db/models');
@@ -184,6 +185,28 @@ router.get('/:userId(\\d+)/connections', asyncHandler(async (req, res) => {
   return res.json({connections})
 }))
 
+
+router.patch('/:userId(\\d+)', asyncHandler(async (req, res) => {
+  const userId = parseInt(req.params.userId, 10);
+
+  const updatedInfo = req.body;
+
+  if (updatedInfo.password) {
+    const user = await User.findByPk(userId)
+
+    user.update({hashed_password: bcrypt.hashSync(updatedInfo.password)})
+
+    return res.json({user: user.toSafeObject()})
+  }
+
+  const user = await User.findByPk(userId)
+
+  user.update(updatedInfo)
+
+
+  return res.json({user: user.toSafeObject()})
+
+}))
 
 
 module.exports = router;
