@@ -19,7 +19,6 @@ const Navbar = () => {
     const [loginModalShowing, setLoginModalShowing] = useState(false);
     const [profileModalShowing, setProfileModalShowing] = useState(false);
     const [getInvolvedModalShowing, setGetInvolvedModalShowing] = useState(false);
-    // const [targetedItem, setTargetedItem] = useState(null);
 
     const currentUser = useSelector(state => state.session.user);
 
@@ -59,32 +58,36 @@ const Navbar = () => {
             }
         }
 
+
+        const circleProfileDiv = document.querySelector(".profile-icon-container")
+        if (circleProfileDiv) {
+            if (profileModalShowing === true) {
+                circleProfileDiv.classList.add("white-border")
+            } else {
+                circleProfileDiv.classList.remove("white-border")
+            }
+        }
+
+
+        const loginButton = document.querySelector(".navbar-menu-login-button")
+        if (loginButton) {
+            if (loginModalShowing === true) {
+                loginButton.classList.add("dark-blue")
+            } else {
+                loginButton.classList.remove("dark-blue")
+            }
+        }
     })
 
 
     const clickLogin = (e) => {
-        e.preventDefault();
-
-        if (e.target.classList.contains("dark-blue")){
-            e.target.classList.remove("dark-blue")
-        } else {
-            e.target.classList.add("dark-blue")
-        }
+      
         setLoginModalShowing(!loginModalShowing)
     }
 
     const clickProfile = (e) => {
-        // e.preventDefault();
 
-
-        // if (!e.target.classList.contains("profile-icon")) {
-            if (e.target.classList.contains("white-border")){
-                e.target.classList.remove("white-border")
-            } else {
-                e.target.classList.add("white-border")
-            }
-            setProfileModalShowing(!profileModalShowing)
-        // }
+        setProfileModalShowing(!profileModalShowing)
     }
 
     const clickMessages = (e) => {
@@ -100,20 +103,8 @@ const Navbar = () => {
     }
 
     const clickGetInvolved = (e) => {
-        e.preventDefault();
 
         setGetInvolvedModalShowing(!getInvolvedModalShowing)
-        // if (getInvolvedModalShowing === false){
-        //     e.target.classList.remove("point-down")
-        //     e.target.classList.add("point-up")
-        // } else {
-        //     e.target.classList.remove("point-up")
-        //     e.target.classList.add("point-down")
-        // }
-
-
-        // console.log(getInvolvedModalShowing)
-
     }
 
     return (
