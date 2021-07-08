@@ -31,8 +31,7 @@
 
 .navbar-title-logo:hover {
     animation: darken 0.2s forwards;
-    height: 89px;
-    width: auto;
+    top: 1px;
     right: 0px;
 }
 

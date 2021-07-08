@@ -24,20 +24,42 @@ const Navbar = () => {
     const currentUser = useSelector(state => state.session.user);
 
 
-    // useEffect(() => {
+    useEffect(() => {
+        document.addEventListener("click", e => {
+            console.log("in here!", e.target)
 
-    //     const clickOutside = (e) => {
-    //         if (!e.target.classList.contains("get-involved-menu-container")) {
-    //             setGetInvolvedModalShowing(false)
-    //         }
-    //     }
 
-    //     if (getInvolvedModalShowing || profileModalShowing || loginModalShowing) {
-    //         document.addEventListener("click", e => clickOutside(e))
-    //     } else {
-    //         document.removeEventListener("click", e => clickOutside(e))
-    //     }
-    // })
+            const involvedClassNames = ["get-involved-menu-container", "get-involved-menu-list", "get-involved"]
+            if (!involvedClassNames.some(className => e.target.classList.contains(className))) {
+                console.log("made it here")
+                setGetInvolvedModalShowing(false);
+            }
+
+            const loginClassNames = ["navbar-menu-login-button", "login-modal-container", "login-form", "login-field", "login-field-input", "form-errors", "form-error-list", "form-error-list-item", "login-submit-button", "login-signup-redirect", "login-signup-redirect-text"]
+            if (!loginClassNames.some(className => e.target.classList.contains(className))) {
+                console.log("made it here")
+                setLoginModalShowing(false);
+            }
+
+            const profileClassNames = ["profile-items", "profile-icon-container", "profile-icon", "profile-modal-container", "profile-menu-list", "profile-menu-list-item"]
+            if (!profileClassNames.some(className => e.target.classList.contains(className))) {
+                console.log("made it here")
+                setProfileModalShowing(false);
+            }
+        })
+
+        const getInvolvedLink = document.querySelector(".get-involved")
+        if (getInvolvedLink) {
+            if (getInvolvedModalShowing === true){
+                getInvolvedLink.classList.remove("point-down")
+                getInvolvedLink.classList.add("point-up")
+            } else {
+                getInvolvedLink.classList.remove("point-up")
+                getInvolvedLink.classList.add("point-down")
+            }
+        }
+
+    })
 
 
     const clickLogin = (e) => {
@@ -52,15 +74,17 @@ const Navbar = () => {
     }
 
     const clickProfile = (e) => {
-        e.preventDefault();
-        if (!e.target.classList.contains("profile-icon")) {
+        // e.preventDefault();
+
+
+        // if (!e.target.classList.contains("profile-icon")) {
             if (e.target.classList.contains("white-border")){
                 e.target.classList.remove("white-border")
             } else {
                 e.target.classList.add("white-border")
             }
             setProfileModalShowing(!profileModalShowing)
-        }
+        // }
     }
 
     const clickMessages = (e) => {
@@ -78,16 +102,17 @@ const Navbar = () => {
     const clickGetInvolved = (e) => {
         e.preventDefault();
 
-        if (e.target.classList.contains("point-down")){
-            e.target.classList.remove("point-down")
-            e.target.classList.add("point-up")
-        } else {
-            e.target.classList.remove("point-up")
-            e.target.classList.add("point-down")
-        }
-
         setGetInvolvedModalShowing(!getInvolvedModalShowing)
-        console.log(getInvolvedModalShowing)
+        // if (getInvolvedModalShowing === false){
+        //     e.target.classList.remove("point-down")
+        //     e.target.classList.add("point-up")
+        // } else {
+        //     e.target.classList.remove("point-up")
+        //     e.target.classList.add("point-down")
+        // }
+
+
+        // console.log(getInvolvedModalShowing)
 
     }
 
@@ -110,7 +135,7 @@ const Navbar = () => {
                             <h1 className="navbar-menu-link-text" onClick={e => clickHome(e)}>Home</h1>
                         </li>
                         <li className="navbar-menu-items-list-item get-involved-items">
-                            <h1 className="navbar-menu-link-text point-down" onClick={e => clickGetInvolved(e)} >Get Involved</h1>
+                            <h1 className="navbar-menu-link-text get-involved point-down" onClick={e => clickGetInvolved(e)} >Get Involved</h1>
                             {getInvolvedModalShowing && <GetInvolvedModal />}
                         </li>
                         <li className="navbar-menu-items-list-item">
@@ -125,7 +150,7 @@ const Navbar = () => {
                         </li>}
                         {currentUser && <li className="navbar-menu-items-list-item profile-items">
                             <div className="profile-icon-container" onClick={e => clickProfile(e)}>
-                                <img className="profile-icon" src="/images/profile.svg" alt=""></img>
+                                <img className="profile-icon" src="/images/profile.svg" alt="" onClick={e => clickProfile(e)}></img>
                             </div>
                             {profileModalShowing && <ProfileModal />}
                             <h1 className="navbar-menu-profile-name">{`Welcome, ${currentUser.username}`}</h1>
