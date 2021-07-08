@@ -79,8 +79,8 @@ module.exports = (sequelize, DataTypes) => {
   });
 
   User.prototype.toSafeObject = function() {
-    const { id, username, email } = this;
-    return { id, username, email };
+    const { id, username, email, zip_code } = this;
+    return { id, username, email, zip_code };
   };
 
   User.prototype.validatePassword = function (password) {
