@@ -1,0 +1,28 @@
+.redirect-modal-container {
+    z-index: 4;
+    background: linear-gradient(to right, #e0aa4ea1 50%,  #464646 50%);
+    background-size: 200% 100%;
+    background-position: right bottom;
+    animation: redirectshift 2.5s forwards;
+    position: absolute;
+    top: 0;
+    left: 0px;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.redirect-modal-title {
+    font-size: 48px;
+    color: #FFFFFF;
+
+
+}
+
+@keyframes redirectshift {
+    100% {
+        background-position: left bottom;
+    }
+}

@@ -82,7 +82,7 @@ const CreateUserForm = ({title, mentor, student}) => { //these props are boolean
 
     const closeErrors = (e) => {
         e.preventDefault()
-        console.log("in here", errors)
+        
         setErrors([]);
     }
 
