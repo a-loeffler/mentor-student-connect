@@ -2,7 +2,7 @@ import { csrfFetch } from './csrf';
 
 const SET_USER = "session/setUser";
 const REMOVE_USER = "session/removeUser";
-
+const PATCH_USER = "session/patchUser";
 
 const setUser = (user) => {
     return {
@@ -14,6 +14,13 @@ const setUser = (user) => {
 const removeUser = () => {
     return {
         type: REMOVE_USER,
+    }
+}
+
+const patchUserInfo = (updatedUserData) => {
+    return {
+        type: PATCH_USER,
+        payload: updatedUserData
     }
 }
 
@@ -50,7 +57,7 @@ export const signup = (user) => async (dispatch) => {
         last_name,
         email,
         password,
-        zip_code, 
+        zip_code,
         mentor,
         student
       }),
@@ -68,6 +75,21 @@ export const logout = () => async (dispatch) => {
     return response;
 };
 
+
+export const updateUserData = (updatedInfo, userId) => async (dispatch) => {
+    // make sure updatedInfo is a POJO
+
+    const response = await csrfFetch(`/api/users/${userId}`, {
+        method: 'PATCH',
+        body: JSON.stringify(updatedInfo)
+    })
+
+    const data = await response.json();
+
+    dispatch(patchUserInfo(data.user))
+    return response;
+}
+
 const initialState = { user: null };
 
 const sessionReducer = (state = initialState, action) => {
@@ -80,6 +102,19 @@ const sessionReducer = (state = initialState, action) => {
         case REMOVE_USER: {
             let newState = {...state};
             newState.user = null;
+            return newState;
+        }
+        case PATCH_USER: {
+            let newState = {...state};
+            let updatedUserData = action.payload;
+            
+            let keysOfUpdate = Object.keys(updatedUserData)
+            keysOfUpdate.forEach(key => {
+                if (newState.user[key] !== updatedUserData[key]) {
+                    newState.user[key] = updatedUserData[key]
+                }
+            })
+
             return newState;
         }
         default:

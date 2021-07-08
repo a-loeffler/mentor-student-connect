@@ -39,13 +39,13 @@ const UserPage = ({editorOpen}) => {
                     <img className="corner-profile-image" src="/images/profile.svg" alt="User profile avatar"></img>
                 </div>
                 {editorOpen === false && <div className="corner-profile-info-container">
-                    <h1 className="corner-profile-info-name">Tim Smith</h1>
-                    <h2 className="corner-profile-info-data">Username: timo13</h2>
-                    <h2 className="corner-profile-info-data" >Email: timo13@group.com</h2>
-                    <h2 className="corner-profile-info-data">Zipcode: 13345</h2>
+                    <h1 className="corner-profile-info-name">{`${currentUser.first_name} ${currentUser.last_name}`}</h1>
+                    <h2 className="corner-profile-info-data">{`Username: ${currentUser.username}`}</h2>
+                    <h2 className="corner-profile-info-data" >{`Email: ${currentUser.email}`}</h2>
+                    <h2 className="corner-profile-info-data">{`Zipcode: ${currentUser.zip_code}`}</h2>
                     <h2 className="corner-profile-info-data edit-settings"><Link className="edit-settings" to={`/users/${currentUser.id}/edit`} >edit settings</Link></h2>
                 </div>}
-                {editorOpen === true && <UserEditPage />}
+                {editorOpen === true && <UserEditPage currentUser={currentUser}/>}
             </div>
             <div className="user-page-widgets-container">
 

@@ -42,7 +42,7 @@
     max-width: 400px;
     top: 330px;
     left: 120px;
-    font-family: Arial;
+
 }
 
 .corner-profile-info-name {
@@ -50,6 +50,7 @@
     font-size: 24px;
     font-weight: bold;
     text-align: center;
+    width: 200px;
     margin-bottom: 20px;
 }
 
@@ -74,4 +75,84 @@
 
 .user-page-widgets-container {
     background-color: green;
+}
+
+
+.user-edit-form {
+    position: absolute;
+    max-width: 400px;
+    top: 330px;
+    left: 120px;
+}
+
+.show-edit-field-button {
+    background-color: #4472C4;
+    color: #ffffff;
+    padding: 5px;
+    border: none;
+    border-radius: 4px;
+    margin-bottom: 5px;
+    display: block;
+    text-align: center;
+    position: relative;
+}
+
+.show-edit-field-button:hover {
+    top: 1px;
+    background-color: #29487e;
+}
+
+.edit-open {
+    background-color: #29487e;
+}
+
+.user-edit-field-container {
+    display: grid;
+    grid-template-columns: 50% 50%;
+}
+
+.user-edit-field-label {
+    font-size: 14px;
+    color: #ffffff;
+    text-align: right;
+    padding-right: 5px;
+}
+
+.user-edit-submit-container {
+    text-align: right;
+}
+
+.user-edit-submit-button {
+    background-color: #E0AA4E;
+    padding: 5px;
+    border: none;
+    border-radius: 4px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    position: relative;
+}
+
+.user-edit-submit-button:hover {
+    filter: brightness(90%);
+    top: 1px;
+}
+
+.success-alert {
+    color: #E0AA4E;
+    text-shadow: 0px 2px 2px #000000a8;
+}
+
+.finish-editing-button {
+    background-color: #E0AA4E;
+    padding: 5px;
+    margin-top: 5px;
+    position: relative;
+    left: 100px;
+    border: none;
+    font-size: 16px;
+}
+
+.finish-editing-button:hover {
+    filter: brightness(90%);
+    top: 1px;
 }
