@@ -203,4 +203,4 @@ const CreateUserForm = ({title, mentor, student}) => { //these props are boolean
 }
 
 
-export default CreateUserForm
+export default CreateUserForm;

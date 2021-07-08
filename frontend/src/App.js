@@ -11,6 +11,7 @@ import Navigation from './components/Navigation';
 import MessagesWidget from './components/MessagesWidget';
 import CreateUserForm from './components/CreateUserForms/CreateUserForm';
 import SignUpMain from './components/SignupPages/SignupMain';
+import UserPage from './components/UserPage/UserPage';
 
 function App() {
   const dispatch = useDispatch()
@@ -34,8 +35,11 @@ function App() {
         <Route path="/messages">
           <MessagesWidget />
         </Route>
-        <Route path="/form">
+        <Route path="/form" >
           <CreateUserForm title={"Sign Up as a Student"} mentor={false} student={true} />
+        </Route>
+        <Route path="/user-page" >
+          <UserPage />
         </Route>
       </Switch>
     </>
