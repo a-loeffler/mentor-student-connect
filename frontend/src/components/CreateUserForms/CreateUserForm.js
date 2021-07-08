@@ -26,6 +26,8 @@ const CreateUserForm = ({title, mentor, student}) => { //these props are boolean
     const [emailErrors, setEmailErrors] = useState([])
 
 
+
+
     useEffect(() => {
 
         if (email !== confirmEmail) {
@@ -68,19 +70,26 @@ const CreateUserForm = ({title, mentor, student}) => { //these props are boolean
 
                         if (data && data.errors) {
                             setErrors(data.errors);
+
                             e.target.classList.remove("submit-shift")
                         }
                     });
             }
-            return setErrors(['Password and Confirm Password do not match'])
 
+            return setErrors(['Password and Confirm Password do not match'])
         }, 1000)
     }
 
+    const closeErrors = (e) => {
+        e.preventDefault()
+        console.log("in here", errors)
+        setErrors([]);
+    }
 
     return (
         <div className="create-user-form-container">
             {errors.length > 0 && <div className="form-error-hover-box">
+                <span className="form-error-modal-exit" onClick={e => closeErrors(e)}>x</span>
                 <ul className="form-error-list">
                     {errors.map((error, index) => <li className="form-error-list-item left-align" key={index} >{error}</li>)}
                 </ul>
