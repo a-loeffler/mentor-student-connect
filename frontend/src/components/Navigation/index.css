@@ -234,6 +234,12 @@
     margin-right: 10px;
 }
 
+.navbar-menu-profile-name:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+
 .new-message-notification {
     position: absolute;
     right: -4px;

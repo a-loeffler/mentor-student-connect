@@ -33,7 +33,7 @@ const LoginModal = () => {
 
         if (currentUser) {
             return (
-                <Redirect to="/" />
+                <Redirect to={`/users/${currentUser.id}`} />
             )
         }
 

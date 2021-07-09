@@ -1,6 +1,6 @@
 .messages-widget-layout {
     display: grid;
-    grid-template-columns: 10% 1fr 10%;
+    grid-template-columns: 5% 1fr 5%;
     grid-template-rows: 100vh;
     background-color: #002F3A;
 }
@@ -195,7 +195,8 @@
 .text-bubble-contents {
     padding-top: 5px;
     font-size: 14px;
-    text-align: center;
+    text-align: left;
+    hyphens: auto;
 }
 
 .minimized {

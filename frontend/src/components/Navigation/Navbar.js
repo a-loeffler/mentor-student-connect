@@ -25,7 +25,7 @@ const Navbar = () => {
 
     useEffect(() => {
         document.addEventListener("click", e => {
-            
+
             const involvedClassNames = ["get-involved-menu-container", "get-involved-menu-list", "get-involved"]
             if (!involvedClassNames.some(className => e.target.classList.contains(className))) {
 
@@ -105,6 +105,13 @@ const Navbar = () => {
         setGetInvolvedModalShowing(!getInvolvedModalShowing)
     }
 
+    const goToUserPage = (e) => {
+        e.preventDefault();
+
+        history.push(`/users/${currentUser.id}`)
+    }
+
+
     return (
         <div className="navbar-container">
             <div className="navbar-sidespace"></div>
@@ -142,8 +149,8 @@ const Navbar = () => {
                                 <img className="profile-icon" src="/images/profile.svg" alt="" onClick={e => clickProfile(e)}></img>
                             </div>
                             {profileModalShowing && <ProfileModal />}
-                            <h1 className="navbar-menu-profile-name">{`Welcome, ${currentUser.username}`}</h1>
-                            <div className="new-message-notification">!</div>
+                            <h1 className="navbar-menu-profile-name" onClick={e => goToUserPage(e)}>{`Welcome, ${currentUser.username}`}</h1>
+                            <div className="new-message-notification" >!</div>
                             <img className="profile-messages-icon" src="/images/envelope.svg" alt="click here to see your messages" onClick={e => clickMessages(e)}></img>
                         </li>}
                     </ul>
