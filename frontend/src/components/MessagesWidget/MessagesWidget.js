@@ -91,7 +91,7 @@ const MessagesWidget = () => {
 
     return (
         <div className="messages-widget-layout">
-            <div className="messages-widget-sidespace"></div>
+
             <div className="messages-widget-container">
                 <div className={`widget-action-bar ${minimized === false ? "" : "full-border"}`}>
                     {`${minimized === false ? "": "Conversations"}`}
@@ -106,7 +106,7 @@ const MessagesWidget = () => {
                     </div>
                 </div>
             </div>
-            <div className="messages-widget-sidespace"></div>
+
         </div>
     )
 

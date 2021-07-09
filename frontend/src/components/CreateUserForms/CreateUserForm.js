@@ -82,7 +82,7 @@ const CreateUserForm = ({title, mentor, student}) => { //these props are boolean
 
     const closeErrors = (e) => {
         e.preventDefault()
-        
+
         setErrors([]);
     }
 
@@ -200,11 +200,10 @@ const CreateUserForm = ({title, mentor, student}) => { //these props are boolean
                     </ul>
                 </div>
 
-                <div className="create-user-button-container">
-                    <button className="create-user-submit-button" onClick={e => submitActions(e)}>Submit</button>
-                </div>
-
             </form>
+            <div className="create-user-button-container">
+                <button className="create-user-submit-button" onClick={e => submitActions(e)}>Submit</button>
+            </div>
         </div>
     )
 

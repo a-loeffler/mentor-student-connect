@@ -91,7 +91,7 @@ const Navbar = () => {
     const clickMessages = (e) => {
         e.preventDefault();
 
-        history.push("/messages")
+        history.push(`/users/${currentUser.id}`)
     }
 
     const clickHome = (e) => {
@@ -149,7 +149,7 @@ const Navbar = () => {
                                 <img className="profile-icon" src="/images/profile.svg" alt="" onClick={e => clickProfile(e)}></img>
                             </div>
                             {profileModalShowing && <ProfileModal />}
-                            <h1 className="navbar-menu-profile-name" onClick={e => goToUserPage(e)}>{`Welcome, ${currentUser.username}`}</h1>
+                            <h1 className="navbar-menu-profile-name" >{`Welcome, ${currentUser.username}`}</h1>
                             <div className="new-message-notification" >!</div>
                             <img className="profile-messages-icon" src="/images/envelope.svg" alt="click here to see your messages" onClick={e => clickMessages(e)}></img>
                         </li>}
