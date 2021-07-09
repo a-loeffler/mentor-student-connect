@@ -1,7 +1,7 @@
 .messages-widget-layout {
-    display: grid;
+    /* display: grid;
     grid-template-columns: 5% 1fr 5%;
-    grid-template-rows: 100vh;
+    grid-template-rows: 100vh; */
     background-color: #002F3A;
 }
 
@@ -97,9 +97,9 @@
 
 .messages-widget-container {
     width: 60%;
-    margin: auto;
+    margin-left: 20px;
     margin-top: 20px;
-    max-height: 500px;
+    max-height: 300px;
 
 }
 
@@ -148,18 +148,18 @@
 .messages-component-container {
     display: grid;
     grid-template-columns: 35% 65%;
-    grid-template-rows: 500px;
+    grid-template-rows: 300px;
     background-color: #005467;
     border: 5px solid #4472C4;
     border-top: none;
-    height: 500px;
+    height: 275px;
     border-bottom-left-radius: 15px;
     border-bottom-right-radius: 15px;
 }
 
 .text-messages-container {
     background-color: #F4DFBE;
-    height: 475px;
+    height: 250px;
     margin-top: 10px;
     margin-right: 10px;
     overflow-y: auto;
@@ -208,6 +208,7 @@
     max-height: 485px;
 
 }
+
 
 .text-input-form {
     position: sticky;

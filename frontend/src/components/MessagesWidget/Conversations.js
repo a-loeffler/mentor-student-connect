@@ -64,7 +64,7 @@ const Conversations = ({conversationIds, messagesObject, approvedConnections}) =
             <div className={`conversation-list-title gold`} >
                 <h3 className="conversation-list-text">Connections</h3>
             </div>
-            {approvedConnections.map((connection, index) => <ConversationListItem
+            {approvedConnections && approvedConnections.map((connection, index) => <ConversationListItem
                                                                                     key={index}
                                                                                     unread={true}
                                                                                     text={`${connection.OtherUserInfo.first_name} ${connection.OtherUserInfo.last_name[0]}.`}

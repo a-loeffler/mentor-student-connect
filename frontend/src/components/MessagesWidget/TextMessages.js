@@ -46,7 +46,7 @@ const TextMessages = ({activeTexts, userId, recipientId}) => {
     return (
         <div className="text-messages-container">
             <div className="text-bubbles-display-container">
-                {activeTexts.length > 0 && activeTexts.map((text, index) => <TextBubble
+                {activeTexts.map((text, index) => <TextBubble
                                                     key={index}
                                                     bubbleType={text.sender_id === userId ? "outgoing" : "incoming"}
                                                     contents={text.contents}
