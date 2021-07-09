@@ -5,6 +5,7 @@ import { useParams, Link } from 'react-router-dom';
 
 import RedirectModal from '../RedirectModal';
 import UserEditPage from './UserEditPage';
+import MessagesWidget from '../MessagesWidget';
 
 import './index.css'
 
@@ -48,7 +49,7 @@ const UserPage = ({editorOpen}) => {
                 {editorOpen === true && <UserEditPage currentUser={currentUser}/>}
             </div>
             <div className="user-page-widgets-container">
-
+                <MessagesWidget />
             </div>
         </div>
     )
