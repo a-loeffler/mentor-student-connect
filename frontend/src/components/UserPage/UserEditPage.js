@@ -44,6 +44,8 @@ const UserEditPage = ({currentUser}) => {
     const [emailSuccess, setEmailSuccess] = useState(false);
     const [zipcodeSuccess, setZipcodeSuccess] = useState(false);
 
+    const [errors, setErrors] = useState([]);
+
     useEffect(() => {
 
         // Username
@@ -163,13 +165,24 @@ const UserEditPage = ({currentUser}) => {
         const updatedInfo = {username: username}
         const userId = currentUser.id;
 
-        dispatch(updateUserData(updatedInfo, userId))
+        return dispatch(updateUserData(updatedInfo, userId))
             .then(setShowUsernameSection(false))
             .then(setUsernameSuccess(true))
             .then(setTimeout(() => {
                 setUsernameSuccess(false)
 
             }, 10000))
+            .catch(async (res) => {
+                const data = await res.json();
+
+                if (data && data.errors) {
+                    setUsernameSuccess(false)
+                    setErrors(data.errors);
+                    setTimeout(() => {
+                        setErrors([])
+                    }, 10000)
+                }
+            });
     }
 
 
@@ -188,7 +201,17 @@ const UserEditPage = ({currentUser}) => {
                     setPasswordSuccess(false)
 
                 }, 10000))
+                .catch(async (res) => {
+                    const data = await res.json();
 
+                    if (data && data.errors) {
+                        setPasswordSuccess(false)
+                        setErrors(data.errors);
+                        setTimeout(() => {
+                            setErrors([])
+                        }, 10000)
+                    }
+                });
         }
 
     }
@@ -209,6 +232,17 @@ const UserEditPage = ({currentUser}) => {
                     setEmailSuccess(false)
 
                 }, 10000))
+                .catch(async (res) => {
+                    const data = await res.json();
+
+                    if (data && data.errors) {
+                        setEmailSuccess(false)
+                        setErrors(data.errors);
+                        setTimeout(() => {
+                            setErrors([])
+                        }, 10000)
+                    }
+                });
 
         }
     }
@@ -227,11 +261,28 @@ const UserEditPage = ({currentUser}) => {
                 setZipcodeSuccess(false)
 
             }, 10000))
+            .catch(async (res) => {
+                const data = await res.json();
+
+                if (data && data.errors) {
+                    setZipcodeSuccess(false)
+                    setErrors(data.errors);
+                    setTimeout(() => {
+                        setErrors([])
+                    }, 10000)
+                }
+            });
     }
 
 
     return (
         <form className="user-edit-form">
+            {errors.length > 0 && <div className="user-edit-form-error-box">
+                <ul>
+                    {errors.map((error, index) => <li className="user-edit-error" key={index}>{error}</li>)}
+                </ul>
+            </div>}
+
             {/* USERNAME SECTION */}
             <button className="show-edit-field-button username-fields-button" onClick={e => usernameFieldsActions(e)}>{editUsernameButtonText}</button>
             {usernameSuccess && <h3 className="success-alert">Username Updated!</h3>}

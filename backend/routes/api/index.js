@@ -3,7 +3,8 @@ const asyncHandler = require('express-async-handler');
 
 //backend routes
 const sessionRouter = require('./session');
-const usersRouter = require('./users')
+const usersRouter = require('./users');
+const mentorsRouter = require('./mentors');
 
 //user auth utilities
 const { setTokenCookie, restoreUser, requireAuth } = require('../../utils/auth');
@@ -11,6 +12,8 @@ const { User } = require('../../db/models');
 
 
 router.use('/session', sessionRouter);
+
+router.use('/mentors', mentorsRouter);
 
 router.use('/users', usersRouter);
 

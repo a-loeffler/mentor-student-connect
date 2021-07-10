@@ -12,6 +12,7 @@ import MessagesWidget from './components/MessagesWidget';
 import CreateUserForm from './components/CreateUserForms/CreateUserForm';
 import SignUpMain from './components/SignupPages/SignupMain';
 import UserRouter from './components/UserPage/index';
+import FindMentorsWidget from './components/FindMentorsWidget/FindMentorsWidget';
 
 function App() {
   const dispatch = useDispatch()
@@ -40,6 +41,9 @@ function App() {
         </Route>
         <Route path="/users">
           <UserRouter />
+        </Route>
+        <Route path="/findmentor">
+          <FindMentorsWidget />
         </Route>
       </Switch>
     </>
