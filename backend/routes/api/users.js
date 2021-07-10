@@ -186,7 +186,34 @@ router.get('/:userId(\\d+)/connections', asyncHandler(async (req, res) => {
 }))
 
 
-router.patch('/:userId(\\d+)', asyncHandler(async (req, res) => {
+
+const validatePatch = [
+    check('email')
+      .isEmail()
+      .optional({ nullable: true })
+      .withMessage('Please provide a valid email.'),
+    check('username')
+      .optional({ nullable: true })
+      .isLength({ min: 4 })
+      .withMessage('Please provide a username with at least 4 characters.'),
+    check('username')
+      .optional({ nullable: true })
+      .not()
+      .isEmail()
+      .withMessage('Username cannot be an email.'),
+    check('password')
+      .optional({ nullable: true })
+      .isLength({ min: 6 })
+      .withMessage('Password must be 6 characters or more.'),
+    check('zip_code')
+      .optional({ nullable: true })
+      .isLength({ min: 5, max: 5 })
+      .withMessage('Please provide a 5-digit zip code for your primary residence'),
+    handleValidationErrors,
+];
+
+
+router.patch('/:userId(\\d+)', validatePatch, asyncHandler(async (req, res) => {
   const userId = parseInt(req.params.userId, 10);
 
   const updatedInfo = req.body;

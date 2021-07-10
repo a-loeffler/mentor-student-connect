@@ -12,7 +12,6 @@ const MessagesWidget = () => {
 
 
     const messagesObject = useSelector((state) => state.userMessages.allMessages)
-    console.log("messages Object in MessagesWidget", messagesObject)
     const connections = useSelector((state) => state.userConnections.allConnections)
 
     const user = useSelector(state => state.session.user)
@@ -52,11 +51,9 @@ const MessagesWidget = () => {
                             e.target.id = "showing-now";
                             setActiveRecipentId(convoId)
                             setActiveTexts(messagesObject[convoId])
-                            console.log("test- messagesObject line 55", activeTexts)
 
                             let lastMessage = document.querySelector(".last")
                             if (lastMessage) {
-                                console.log("in here", lastMessage)
                                 lastMessage.scrollIntoView(false);
                             }
                             //to-do: create and run thunk action to change "unreads" if needed

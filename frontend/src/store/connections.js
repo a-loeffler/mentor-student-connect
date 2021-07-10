@@ -1,9 +1,8 @@
-import { csrfFetch } from './csrf'
+
 
 const GET_CONNECTIONS = "connections/get";
 const GET_CONNECTION_USERS = 'connections/get/users'
 const SET_REFRESH = "connections/refresh"
-
 
 const getConnections = (connectionData, userId) => {
     return {
@@ -27,6 +26,8 @@ const refreshConnections = (refreshValue) => {
         payload: refreshValue
     }
 }
+
+
 
 
 export const getConnectionsForUser = (userId) => async(dispatch) => {
@@ -54,6 +55,8 @@ export const setConnectionsNeedsRefreshState = (refreshValue) => async(dispatch)
 }
 
 
+
+
 const initialState = {allConnections: [], needsRefresh: true}
 
 const connectionsReducer = (state = initialState, action) => {
@@ -75,18 +78,6 @@ const connectionsReducer = (state = initialState, action) => {
             newState.needsRefresh = refreshValue;
 
             return newState;
-        }
-        case GET_CONNECTION_USERS: {
-            let newState = {...state}
-
-            let connectionUserData = action.payload;
-
-            newState.allConnections.forEach(connection => {
-                connectionUserData.forEach(user => {
-
-                })
-            })
-
         }
         default: {
             return state;

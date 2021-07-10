@@ -4,6 +4,7 @@ import thunk from 'redux-thunk';
 import sessionReducer from './session';
 import messagesReducer from './messages';
 import connectionsReducer from './connections';
+import mentorsReducer from './mentors';
 
 let enhancer;
 
@@ -22,7 +23,8 @@ if (process.env.NODE_ENV === 'production') {
 const rootReducer = combineReducers({
     session: sessionReducer,
     userMessages: messagesReducer,
-    userConnections: connectionsReducer
+    userConnections: connectionsReducer,
+    mentors: mentorsReducer
 
 });
 
