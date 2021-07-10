@@ -33,17 +33,8 @@ function App() {
         <Route path="/signup">
           <SignUpMain />
         </Route>
-        <Route path="/messages">
-          <MessagesWidget />
-        </Route>
-        <Route path="/form" >
-          <CreateUserForm title={"Sign Up as a Student"} mentor={false} student={true} />
-        </Route>
         <Route path="/users">
           <UserRouter />
-        </Route>
-        <Route path="/findmentor">
-          <FindMentorsWidget />
         </Route>
       </Switch>
     </>

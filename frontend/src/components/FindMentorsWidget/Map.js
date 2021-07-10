@@ -1,10 +1,13 @@
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { GoogleMap, LoadScript, Marker, useJsApiLoader } from '@react-google-maps/api';
+import { GoogleMap, LoadScript, Marker, useJsApiLoader, InfoWindow } from '@react-google-maps/api';
+
+import MentorCard from './MentorCard';
+
 import zipcodeMatcher from '../../zipcodedata';
 
-import { getMentors } from '../../store/mentors'
+
 
 const Map = () => {
     const dispatch = useDispatch();
@@ -15,13 +18,13 @@ const Map = () => {
 
     const [center, setCenter] = useState({})
 
-    const [checkedMentor, setCheckedMentor] = useState(null)
+    const [checkedMentor, setCheckedMentor] = useState({})
 
 
     useEffect(() => {
 
         if (currentUser) {
-            
+
             const [userLat, userLng] = zipcodeMatcher[currentUser.zip_code];
 
             setCenter({
@@ -38,33 +41,22 @@ const Map = () => {
 
 
 
-
-    // if (Object.keys(mentors).length > 0) {
-    //     console.log("line32")
-    //     setMentorKeys(Object.keys(mentors))
-    //     console.log(mentors)
-    // } else {
-    //     dispatch(getMentors(currentUser.zip_code))
-    //         .then(console.log(mentors))
-    // }
-
-
-
     const containerStyle = {
-        width: '350px',
-        height: '200px',
+        width: '400px',
+        height: '250px',
     }
 
 
 
     const coordinateLister = (mentorKeys) => {
-        const newArray = [];
+        const validArray = [];
 
         for (let i = 0; i < mentorKeys.length; i++) {
             let key = mentorKeys[i];
             let mentor = mentors[key];
 
             let zipcode = mentor.zip_code;
+            let mentorName = `${mentor.first_name} ${mentor.last_name}`;
 
             if(zipcodeMatcher[zipcode]) {
                 const [markerLat, markerLng] = zipcodeMatcher[zipcode];
@@ -74,48 +66,29 @@ const Map = () => {
                     lng: markerLng
                 }
                     //put in a reference to the userId
-                newArray.push({mentorId: mentor.id, markerCoordinates: markerCoordinates});
+                validArray.push({
+                    mentorId: mentor.id,
+                    mentorZipcode: zipcode,
+                    mentorName: mentorName,
+                    markerCoordinates: markerCoordinates
+                });
 
             }
 
         }
 
-        return newArray;
+        return validArray;
     }
 
     const coordinatesToMap = coordinateLister(mentorKeys);
     console.log(coordinatesToMap);
 
-    // const coordinateFinder = (key) => {
-    //     const mentor = mentors[key]
-    //     const zipcode = mentor.zip_code;
 
-    //     console.log(zipcodeMatcher[zipcode])
 
-    //     if (zipcodeMatcher[String(zipcode)]) {
+    const onSelect = (item) => {
+        setCheckedMentor(item);
+    }
 
-    //         const [markerLat, markerLng] = zipcodeMatcher[String(zipcode)]
-
-    //         const markerCoordinates = {
-    //             lat: markerLat,
-    //             lng: markerLng
-    //         }
-    //         console.log(key, markerCoordinates)
-
-    //         return markerCoordinates;
-    //     }
-
-    //     return ""
-    //     // return markerCoordinates;
-    // }
-
-    // console.log(mentorKeys)
-
-    // const checker = mentorKeys.map((key, index) => {
-    //     coordinateFinder(key)
-    // })
-
-    // console.log(checker)
 
 
     return (
@@ -127,9 +100,26 @@ const Map = () => {
                     mapContainerStyle={containerStyle}
                     zoom={8}
                     center={center}
+                    defaultOptions={{mapTypeControl: false}}
                 >
 
-                    {coordinatesToMap.map((coordinates, index) => <Marker key={index} position={coordinates.markerCoordinates} />)}
+                    {coordinatesToMap.map((coordinates, index) => <Marker key={index} position={coordinates.markerCoordinates} onClick={() => onSelect(coordinates)}/>)}
+
+                    {checkedMentor.markerCoordinates && (
+                        <InfoWindow
+                            position={checkedMentor.markerCoordinates}
+                            clickable={true}
+                            onCloseClick={() => setCheckedMentor({})}
+
+                        >
+                            <MentorCard
+                                mentorName={checkedMentor.mentorName}
+                                mentorId={checkedMentor.mentorId}
+                                mentorZipcode={checkedMentor.mentorZipcode}
+                            />
+                        </InfoWindow>
+                    )}
+
                 </GoogleMap>
             </div>
 

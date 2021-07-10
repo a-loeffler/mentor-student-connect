@@ -6,6 +6,7 @@ import { useParams, Link } from 'react-router-dom';
 import RedirectModal from '../RedirectModal';
 import UserEditPage from './UserEditPage';
 import MessagesWidget from '../MessagesWidget';
+import FindMentorsWidget from '../FindMentorsWidget/FindMentorsWidget';
 
 import './index.css'
 
@@ -50,6 +51,7 @@ const UserPage = ({editorOpen}) => {
             </div>
             <div className="user-page-widgets-container">
                 <MessagesWidget />
+                {currentUser.student === true && <FindMentorsWidget />}
             </div>
         </div>
     )

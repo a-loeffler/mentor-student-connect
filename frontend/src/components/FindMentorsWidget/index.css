@@ -1,0 +1,99 @@
+/* Mentor Card */
+
+.mentor-card-container {
+    background-color: #453936;
+    border: 1px solid #000000;
+    width: 200px;
+}
+
+.mentor-card-title-container {
+    height: 30px;
+    background-color: #E0AA4E;
+    border-bottom: 1px solid #000000;
+    display: flex;
+    align-items: center;
+}
+
+.mentor-card-title {
+    font-size: 20px;
+    font-weight: normal;
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: 5px;
+}
+
+.mentor-card-content-container {
+    display: grid;
+    grid-template-columns: 40% 60%;
+    grid-template-rows: 120px;
+}
+
+.mentor-card-picture-container {
+    border: 1px solid #000000;
+    background-color: #4472C4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 5px;
+}
+
+.mentor-card-picture {
+    height: 90%;
+    width: auto;
+}
+
+.mentor-card-info-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 60% 40%;
+    margin: 5px;
+}
+
+.mentor-info {
+    padding-top: 10px;
+}
+
+.mentor-card-name {
+    color: #E0AA4E;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.mentor-card-zipcode {
+    color: #ffffff;
+    font-size: 12px;
+}
+
+.mentor-card-button-container {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.mentor-card-connection-request-button {
+    background-color: #E0AA4E;
+    border: 1px solid #000000;
+    position: relative;
+    box-shadow: 0px 2px 2px #0000005d;
+    color: #ffffff;
+    font-size: 10px;
+}
+
+.mentor-card-connection-request-button:hover {
+    filter: brightness(75%);
+    top: 1px;
+
+}
+
+
+/* Find-Mentors-Widget */
+.find-mentors-widget-layout {
+    width: 60%;
+    margin-left: 20px;
+    margin-top: 20px;
+}
+
+.widget-container {
+    background-color: #F4DFBE;
+
+}
