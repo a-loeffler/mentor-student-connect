@@ -26,10 +26,10 @@ const FindMentorsWidget = () => {
     return (
         <div className="find-mentors-widget-layout">
             <div className={`widget-action-bar ${minimized === false ? "" : "full-border"}`}>
-                {`${minimized === false ? "": "Find a Mentor"}`}
+                Find a Mentor
                 <button className="widget-collapse-button" onClick={e => minimizeActions(e)}>-</button>
             </div>
-            <div className="widget-container">
+            <div className={`widget-container ${minimized === false ? "" : "minimized"}`}>
                 <Map />
             </div>
         </div>

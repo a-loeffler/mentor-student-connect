@@ -236,4 +236,16 @@ router.patch('/:userId(\\d+)', validatePatch, asyncHandler(async (req, res) => {
 }))
 
 
+router.post('/:studentId(\\d+)/connections', asyncHandler(async (req, res) => {
+  const student_id = parseInt(req.params.studentId, 10);
+
+  const { mentor_id } = req.body;
+
+  const approved = false;
+
+  const newConnection = await Connection.create({student_id, mentor_id: parseInt(mentor_id, 10), approved})
+
+  return res.json({connection: newConnection})
+}))
+
 module.exports = router;

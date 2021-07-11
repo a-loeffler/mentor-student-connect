@@ -42,7 +42,7 @@ const Map = () => {
 
 
     const containerStyle = {
-        width: '400px',
+        width: '100%',
         height: '250px',
     }
 
