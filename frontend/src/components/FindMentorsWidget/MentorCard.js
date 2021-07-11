@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 
@@ -9,10 +10,17 @@ const MentorCard = ({mentorName, mentorZipcode, mentorId}) => {
 
     const currentUser = useSelector(state => state.session.user)
 
+    const [requestMessage, setRequestMessage] = useState("Send Connection Request")
+
     const connectionRequestActions = (e) => {
         e.preventDefault()
 
-        dispatch(postNewConnection(currentUser.id, mentorId))
+
+        if (requestMessage === "Send Connection Request") {
+            return dispatch(postNewConnection(currentUser.id, mentorId))
+                .then(e.target.classList.add("disabled"))
+                .then(setRequestMessage("Connection Request Sent"))
+        }
     }
 
     return (
@@ -22,7 +30,7 @@ const MentorCard = ({mentorName, mentorZipcode, mentorId}) => {
             </div>
             <div className="mentor-card-content-container">
                 <div className="mentor-card-picture-container">
-                    <img className="mentor-card-picture" src="/images/profile.svg" alt="mentor's profile image"></img>
+                    <img className="mentor-card-picture" src="/images/profile.svg" alt="mentor's profile avatar"></img>
                 </div>
 
                 <div className="mentor-card-info-container">
@@ -31,7 +39,7 @@ const MentorCard = ({mentorName, mentorZipcode, mentorId}) => {
                         <h2 className="mentor-card-zipcode">{mentorZipcode}</h2>
                     </div>
                     <div className="mentor-card-button-container">
-                        <button className="mentor-card-connection-request-button" onClick={e => connectionRequestActions(e)} >Send Connection Request</button>
+                        <button className="mentor-card-connection-request-button" disabled={requestMessage !== "Send Connection Request"} onClick={e => connectionRequestActions(e)} >{requestMessage}</button>
                     </div>
                 </div>
             </div>

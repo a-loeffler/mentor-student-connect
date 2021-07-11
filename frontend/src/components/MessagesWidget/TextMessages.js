@@ -14,7 +14,7 @@ const TextMessages = ({activeTexts, userId, recipientId}) => {
     const [refreshNow, setRefreshNow] = useState(false);
 
     useEffect(() => {
-        console.log("refresh", refreshNow)
+
     }, [dispatch, refreshNow])
 
     const sendText = (e) => {
@@ -22,12 +22,10 @@ const TextMessages = ({activeTexts, userId, recipientId}) => {
         if (messageText) {
             const contents = messageText;
 
-            dispatch(postNewMessage(userId, recipientId, contents))
+            return dispatch(postNewMessage(userId, recipientId, contents))
             // dispatch(setMessagesNeedsRefreshState(true))
                 // .then(() => setRefreshNow(!refreshNow))
                 .then(() => setMessageText(""))
-
-                console.log("after the post new message dispatch")
 
             // setMessageText("");
         }
@@ -35,8 +33,7 @@ const TextMessages = ({activeTexts, userId, recipientId}) => {
         //to-do: dispatch thunk to post to database; rerender current position with new text
     }
 
-    console.log("text messages render line 37")
-    console.log("activeTexts", activeTexts)
+    
     //to-do: get media for little icon boxes next to messages
     //to-do: display active character limit for text message at bottom
 
@@ -46,12 +43,13 @@ const TextMessages = ({activeTexts, userId, recipientId}) => {
     return (
         <div className="text-messages-container">
             <div className="text-bubbles-display-container">
-                {activeTexts.map((text, index) => <TextBubble
+                {activeTexts && activeTexts.map((text, index) => <TextBubble
                                                     key={index}
                                                     bubbleType={text.sender_id === userId ? "outgoing" : "incoming"}
                                                     contents={text.contents}
                                                     last={index === activeTexts.length - 1}
                                                     />)}
+                {!activeTexts && <p className="begin-conversation-message">Begin a new conversation with this user...</p>}
             </div>
             <form className="text-input-form" onSubmit={e => sendText(e)}>
                 <input className="text-input-field" type="text" placeholder="Add message" value={messageText} onChange={e => setMessageText(e.target.value)} autoFocus></input>

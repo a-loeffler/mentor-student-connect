@@ -1,24 +1,43 @@
 import { useDispatch } from 'react-redux'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 
 import './index.css'
 
-import { approveConnection } from '../../store/connections'
+import { approveConnection, rejectConnection } from '../../store/connections'
 
 
 
-const ApprovalListItem = ({color, pendingName, pendingZipcode, pendingId}) => {
+const ApprovalListItem = ({color, pendingName, pendingZipcode, pendingId, setRefresher, refresher}) => {
     const dispatch = useDispatch();
-    const [updateNow, setUpdateNow] = useState(false)
 
-    const approveConnectionActions = (e) => {
+    const [approveMessage, setApproveMessage] = useState("Approve")
+    const [rejectMessage, setRejectMessage] = useState("Reject")
+
+    useEffect(() => {
+
+    }, [dispatch])
+
+
+    const approveConnectionActions = async(e) => {
         e.preventDefault();
 
-        dispatch(approveConnection(pendingId))
-            .then(setUpdateNow(!updateNow))
+        return dispatch(approveConnection(pendingId))
+            .then(() => e.target.classList.add("disabled"))
+            .then(() => setApproveMessage("Connection Approved!"))
+
+
     }
 
+
+    const rejectConnectionActions = (e) => {
+        e.preventDefault();
+
+        return dispatch(rejectConnection(pendingId))
+            .then(() => e.target.classList.add("disabled"))
+            .then(() => setRejectMessage("Connection Rejected."))
+
+    }
 
     return (
         <div className="approval-list-item-container" >
@@ -30,8 +49,8 @@ const ApprovalListItem = ({color, pendingName, pendingZipcode, pendingId}) => {
                 <h2 className="approval-list-item-zipcode">{pendingZipcode}</h2>
             </div>
             <div className="approval-list-item-button-container">
-                <button className="approval-confirm-button" onClick={e => approveConnectionActions(e)}>Approve</button>
-                <button className="approval-reject-button">Reject</button>
+                {rejectMessage === "Reject" && <button className="approval-confirm-button" disabled={approveMessage !== "Approve"} onClick={e => approveConnectionActions(e)}>{approveMessage}</button>}
+                {approveMessage === "Approve" && <button className="approval-reject-button" disabled={rejectMessage !== "Reject"} onClick={e => rejectConnectionActions(e)}>{rejectMessage}</button>}
             </div>
         </div>
     )

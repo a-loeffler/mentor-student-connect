@@ -4,6 +4,7 @@ const GET_CONNECTIONS = "connections/get";
 const SET_REFRESH = "connections/refresh"
 const POST_CONNECTION = "connections/post"
 const PATCH_CONNECTION = "connections/patch"
+const DELETE_CONNECTION = "connections/delete"
 
 const getConnections = (connectionData, userId) => {
     return {
@@ -32,6 +33,13 @@ const patchConnection = (approvedConnection) => {
     return {
         type: PATCH_CONNECTION,
         payload: approvedConnection
+    }
+}
+
+const deleteOneConnection = (deletedConnectionId) => {
+    return {
+        type: DELETE_CONNECTION,
+        payload: deletedConnectionId,
     }
 }
 
@@ -70,6 +78,17 @@ export const approveConnection = (connectionId) => async(dispatch) => {
     const data = await response.json();
 
     dispatch(patchConnection(data.connection))
+    return response;
+}
+
+export const rejectConnection = (connectionId) => async(dispatch) => {
+    const response = await csrfFetch(`/api/connections/${connectionId}`, {
+        method: "DELETE",
+    })
+
+    const data = await response.json();
+
+    dispatch(deleteOneConnection(data.connectionId))
     return response;
 }
 
@@ -117,6 +136,18 @@ const connectionsReducer = (state = initialState, action) => {
             })
 
             return newState;
+        }
+        case DELETE_CONNECTION: {
+            let newState = {...state}
+
+            let deletedConnectionId = action.payload;
+
+            let newAllConnections = newState.allConnections.filter(connection => connection.id !== deletedConnectionId)
+
+            newState.allConnections = newAllConnections;
+
+            return newState;
+
         }
         default: {
             return state;

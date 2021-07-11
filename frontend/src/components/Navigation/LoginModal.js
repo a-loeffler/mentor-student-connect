@@ -17,8 +17,7 @@ const LoginModal = () => {
     const submitHandler = (e) => {
         e.preventDefault();
 
-        console.log(credential)
-        console.log(password)
+        
         setErrors([]);
 
         return dispatch(sessionActions.login({ credential, password }))

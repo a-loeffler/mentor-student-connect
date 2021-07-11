@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import { GoogleMap, LoadScript, Marker, InfoWindow } from '@react-google-maps/api';
 
@@ -10,11 +10,11 @@ import zipcodeMatcher from '../../zipcodedata';
 
 
 const Map = () => {
-    const dispatch = useDispatch();
+
 
     const currentUser = useSelector(state => state.session.user)
     const mentors = useSelector(state => state.mentors)
-    console.log(mentors)
+
 
     const [center, setCenter] = useState({})
 
@@ -34,7 +34,7 @@ const Map = () => {
         }
 
 
-    }, [])
+    }, [currentUser])
 
 
     const mentorKeys = Object.keys(mentors)
@@ -81,7 +81,7 @@ const Map = () => {
     }
 
     const coordinatesToMap = coordinateLister(mentorKeys);
-    console.log(coordinatesToMap);
+    
 
 
 

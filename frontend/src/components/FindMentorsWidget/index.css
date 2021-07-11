@@ -200,3 +200,15 @@
     padding-top: 15px;
     padding-left: 10px;
 }
+
+
+.disabled {
+    background-color: #464646;
+    position: relative;
+}
+
+.disabled:hover {
+    top: 0;
+    background-color: #464646;
+    filter: none;
+}

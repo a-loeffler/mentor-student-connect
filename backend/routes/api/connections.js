@@ -25,4 +25,15 @@ router.patch('/:connectionId(\\d+)', asyncHandler(async (req, res) => {
 }))
 
 
+router.delete('/:connectionId(\\d+)', asyncHandler(async (req, res) => {
+    const connectionId = parseInt(req.params.connectionId, 10);
+
+    const connectionToDelete = await Connection.findByPk(connectionId);
+
+    connectionToDelete.destroy();
+
+    return res.json({connectionId})
+}))
+
+
 module.exports = router;

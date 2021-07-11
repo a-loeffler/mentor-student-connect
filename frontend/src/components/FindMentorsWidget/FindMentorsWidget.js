@@ -1,7 +1,6 @@
 import { useState } from "react"
 
 
-import MentorCard from "./MentorCard";
 import Map from "./Map"
 
 
