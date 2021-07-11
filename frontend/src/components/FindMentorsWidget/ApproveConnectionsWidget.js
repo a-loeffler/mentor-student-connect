@@ -13,9 +13,15 @@ const ApproveConnectionsWidget = () => {
 
     const [minimized, setMinimized] = useState(false);
     const [unapprovedConnections, setUnapprovedConnections] = useState([])
+    const [refresher, setRefresher] = useState(false)
 
     useEffect(() => {
-        setUnapprovedConnections(connections.filter(connection => connection.approved === false))
+        if (connections) {
+            let unapprovedConnectionsList = connections.filter(connection => connection.approved === false)
+            
+            setUnapprovedConnections(unapprovedConnectionsList)
+
+        }
     }, [connections])
 
 
@@ -53,6 +59,8 @@ const ApproveConnectionsWidget = () => {
                                                                         pendingName={nameWriter(connection)}
                                                                         pendingZipcode={connection.OtherUserInfo.zip_code}
                                                                         pendingId={connection.id}
+                                                                        setRefresher={setRefresher}
+                                                                        refresher={refresher}
                                                                         />)}
                     {unapprovedConnections.length === 0 && <h1 className="no-pending-connections chocolate-li">No Pending Connections</h1>}
                 </div>

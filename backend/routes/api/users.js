@@ -93,26 +93,26 @@ router.post('/:userId(\\d+)/messages/:recipientId(\\d+)', asyncHandler(async (re
 
 
   //get updated full conversation to add to store
-  const conversation = await Message.findAll({
-    where: {
-      [Op.or]: [
-        {
-          sender_id: {
-            [Op.or]: [senderId, recipientId]
-          }
-        },
-        {
-          recipient_id: {
-            [Op.or]: [senderId, recipientId]
-          }
-        }
-      ]
-    },
-    order: ['id']
-  })
+  // const conversation = await Message.findAll({
+  //   where: {
+  //     [Op.or]: [
+  //       {
+  //         sender_id: {
+  //           [Op.or]: [senderId, recipientId]
+  //         }
+  //       },
+  //       {
+  //         recipient_id: {
+  //           [Op.or]: [senderId, recipientId]
+  //         }
+  //       }
+  //     ]
+  //   },
+  //   order: ['id']
+  // })
 
 
-  return res.json({conversation})
+  return res.json({newMessage})
 }))
 
 
@@ -247,6 +247,8 @@ router.post('/:studentId(\\d+)/connections', asyncHandler(async (req, res) => {
 
   return res.json({connection: newConnection})
 }))
+
+
 
 
 module.exports = router;

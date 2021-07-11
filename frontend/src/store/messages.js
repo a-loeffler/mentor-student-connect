@@ -13,10 +13,10 @@ const getMessages = (messages, userId) => {
     }
 }
 
-const postMessage = (recipientId, conversation) => {
+const postMessage = (recipientId, newMessage) => {
     return {
         type: POST_MESSAGE,
-        payload: { recipientId, conversation}
+        payload: { recipientId, newMessage}
     }
 }
 
@@ -54,7 +54,7 @@ export const postNewMessage = (userId, recipientId, contents) => async(dispatch)
     })
     const data = await response.json()
     //expect back the full list of messages that match the recipientId
-    dispatch(postMessage(recipientId, data.conversation))
+    dispatch(postMessage(recipientId, data.newMessage))
 
 }
 
@@ -106,7 +106,12 @@ const messagesReducer = (state = initialState, action) => {
         case POST_MESSAGE: {
             let newState = Object.assign({}, state)
             let recipientId = action.payload.recipientId;
-            newState.allMessages[recipientId].push(action.payload.conversation[action.payload.conversation.length - 1]);
+            let newMessage = action.payload.newMessage
+            if (newState.allMessages[recipientId]) {
+                newState.allMessages[recipientId].push(newMessage);
+            } else {
+                newState.allMessages[recipientId] = [newMessage]
+            }
             return newState;
         }
         case SET_REFRESH: {

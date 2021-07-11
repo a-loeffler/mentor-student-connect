@@ -48,7 +48,7 @@
 }
 
 .chocolate:hover {
-    background-color: #423735;
+    background-color: #3a312f;
     cursor: pointer;
 }
 
@@ -160,7 +160,8 @@
 
 .text-messages-container {
     background-color: #F4DFBE;
-    height: 250px;
+    min-height: 250px;
+    max-height: 250px;
     margin-top: 10px;
     margin-right: 10px;
     overflow-y: auto;
@@ -269,4 +270,9 @@
     100% {
         background-position: left bottom;
     }
+}
+
+.begin-conversation-message {
+    color: #c0ac8b;
+    margin: 5px;
 }

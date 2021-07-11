@@ -50,7 +50,11 @@ const Conversations = ({conversationIds, messagesObject, approvedConnections}) =
     const unreadChecker = (otherId) => {
         console.log(otherId)
         console.log(messagesObject)
-        return currentMessages[otherId].some(message => message.read === false)
+        if (currentMessages[otherId]) {
+            return currentMessages[otherId].some(message => message.read === false)
+        } else {
+            return false;
+        }
     }
 
 
@@ -66,7 +70,7 @@ const Conversations = ({conversationIds, messagesObject, approvedConnections}) =
             </div>
             {approvedConnections && approvedConnections.map((connection, index) => <ConversationListItem
                                                                                     key={index}
-                                                                                    unread={true}
+                                                                                    unread={unreadChecker(connection.OtherUserInfo.id)}
                                                                                     text={`${connection.OtherUserInfo.first_name} ${connection.OtherUserInfo.last_name[0]}.`}
                                                                                     itemId={`conversation-${index % 2 === 0 ? "chocolate" : "brick"}-${connection.OtherUserInfo.id}`}
                                                                                     color={index % 2 === 0 ? "chocolate" : "brick"}

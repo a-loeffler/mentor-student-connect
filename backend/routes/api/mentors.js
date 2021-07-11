@@ -10,8 +10,6 @@ const router = express.Router();
 router.get('/:zipcode', asyncHandler(async (req, res) => {
     const zipcode = req.params.zipcode;  //this will be useful for refactoring later
 
-    console.log("in here***", zipcode)
-
     const mentors = await User.findAll({
         where: {
             mentor: true,

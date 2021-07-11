@@ -30,7 +30,7 @@ const MessagesWidget = () => {
 
         if (connections) {
             let approvedConnectionsList = connections.filter(connection => connection.approved)
-            console.log(approvedConnectionsList)
+            
             setApprovedConnections(approvedConnectionsList)
         }
 
@@ -67,7 +67,7 @@ const MessagesWidget = () => {
 
     }, [messagesObject, activeTexts, minimized, user, connections])
 
-    console.log("MessagesWidget ***messagesObject", messagesObject)
+
     //
 
     //each key in the messages object tells us the other user in the conversation;
