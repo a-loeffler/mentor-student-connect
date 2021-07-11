@@ -1,21 +1,13 @@
-
+import { csrfFetch } from './csrf'
 
 const GET_CONNECTIONS = "connections/get";
-const GET_CONNECTION_USERS = 'connections/get/users'
 const SET_REFRESH = "connections/refresh"
+const POST_CONNECTION = "connections/post"
 
 const getConnections = (connectionData, userId) => {
     return {
         type: GET_CONNECTIONS,
         payload: connectionData
-    }
-}
-
-
-const getConnectionUsers = (connectionUserData) => {
-    return {
-        type: GET_CONNECTION_USERS,
-        payload: connectionUserData
     }
 }
 
@@ -28,6 +20,12 @@ const refreshConnections = (refreshValue) => {
 }
 
 
+const postConnection = (newConnectionData) => {
+    return {
+        type: POST_CONNECTION,
+        payload: newConnectionData
+    }
+}
 
 
 export const getConnectionsForUser = (userId) => async(dispatch) => {
@@ -38,22 +36,22 @@ export const getConnectionsForUser = (userId) => async(dispatch) => {
 
 }
 
-
-const getUserDataForConnections = (userId, connectionUsersList) => async(dispatch) => {
-    const response = await fetch('/api/users/:id/connections/data')
-
-    const data = await response.json();
-
-    dispatch(getConnectionUsers(data.connectionUsers));
-
-
-}
-
-
 export const setConnectionsNeedsRefreshState = (refreshValue) => async(dispatch) => {
     dispatch(refreshConnections(refreshValue))
 }
 
+
+export const postNewConnection = (studentId, mentorId) => async(dispatch) => {
+    const response = await csrfFetch(`/api/users/${studentId}/connections`, {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({mentor_id: mentorId})
+    })
+    const data = await response.json()
+    dispatch(postConnection(data.connection))
+}
 
 
 
@@ -76,6 +74,15 @@ const connectionsReducer = (state = initialState, action) => {
             let refreshValue = action.payload;
 
             newState.needsRefresh = refreshValue;
+
+            return newState;
+        }
+        case POST_CONNECTION: {
+            let newState = {...state}
+
+            let newConnection = action.payload;
+
+            newState.allConnections.push(newConnection);
 
             return newState;
         }

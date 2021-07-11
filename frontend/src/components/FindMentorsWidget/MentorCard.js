@@ -1,12 +1,18 @@
-import './index.css'
+import { useDispatch, useSelector } from 'react-redux'
 
+
+import './index.css'
+import { postNewConnection } from '../../store/connections'
 
 const MentorCard = ({mentorName, mentorZipcode, mentorId}) => {
+    const dispatch = useDispatch();
 
-
+    const currentUser = useSelector(state => state.session.user)
 
     const connectionRequestActions = (e) => {
         e.preventDefault()
+
+        dispatch(postNewConnection(currentUser.id, mentorId))
     }
 
     return (
@@ -16,7 +22,7 @@ const MentorCard = ({mentorName, mentorZipcode, mentorId}) => {
             </div>
             <div className="mentor-card-content-container">
                 <div className="mentor-card-picture-container">
-                    <img className="mentor-card-picture" src="images/profile.svg" alt="mentor's profile image"></img>
+                    <img className="mentor-card-picture" src="/images/profile.svg" alt="mentor's profile image"></img>
                 </div>
 
                 <div className="mentor-card-info-container">
