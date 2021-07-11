@@ -16,7 +16,7 @@ const ProfileModal = () => {
     }
 
     const goToEditPage = (e) => {
-        history.push(`users/${currentUser.id}/edit`)
+        history.push(`/users/${currentUser.id}/edit`)
     }
 
 

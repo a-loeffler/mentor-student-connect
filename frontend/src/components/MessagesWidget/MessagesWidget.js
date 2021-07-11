@@ -2,13 +2,14 @@
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
-import { setsetIdForActiveMessages } from '../../store/messages';
+import { setIdForActiveMessages, markMessagesAsRead } from '../../store/messages';
+
 
 import Conversations from "./Conversations"
 import TextMessages from "./TextMessages"
 
 const MessagesWidget = () => {
-
+    const dispatch = useDispatch()
 
 
     const messagesObject = useSelector((state) => state.userMessages.allMessages)
@@ -22,6 +23,8 @@ const MessagesWidget = () => {
     const [activeRecipientId, setActiveRecipentId] = useState(null);
     const [approvedConnections, setApprovedConnections] = useState([]);
 
+    const [loader, setLoader] = useState(false)
+
     useEffect(() => {
         if (user) {
             setUserId(user.id)
@@ -30,7 +33,7 @@ const MessagesWidget = () => {
 
         if (connections) {
             let approvedConnectionsList = connections.filter(connection => connection.approved)
-            
+
             setApprovedConnections(approvedConnectionsList)
         }
 
@@ -52,6 +55,16 @@ const MessagesWidget = () => {
                             setActiveRecipentId(convoId)
                             setActiveTexts(messagesObject[convoId])
 
+                            if (activeTexts) {
+
+                                activeTexts.forEach(message => {
+
+                                    if (message.recipient_id === userId && message.read === false) {
+                                        dispatch(markMessagesAsRead(message.id, userId, message.sender_id))
+                                    }
+                                })
+                            }
+
                             let lastMessage = document.querySelector(".last")
                             if (lastMessage) {
                                 lastMessage.scrollIntoView(false);
@@ -65,7 +78,7 @@ const MessagesWidget = () => {
             })
         }
 
-    }, [messagesObject, activeTexts, minimized, user, connections])
+    }, [messagesObject, activeTexts, minimized, user, connections, loader])
 
 
     //
@@ -89,7 +102,7 @@ const MessagesWidget = () => {
     return (
         <div className="messages-widget-layout">
 
-            <div className="messages-widget-container">
+            <div className="messages-widget-container" onMouseOver={() => setLoader(!loader)}>
                 <div className={`widget-action-bar ${minimized === false ? "" : "full-border"}`}>
                     Your Conversations
                     <button className="widget-collapse-button" onClick={e => minimizeActions(e)}>-</button>
