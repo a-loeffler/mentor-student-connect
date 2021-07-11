@@ -1,7 +1,6 @@
 
 
 
-
 const ConversationListItem = ({text, color, unread, itemId}) => {
 
 

@@ -9,6 +9,7 @@ import ConversationListItem from './ConversationListItem'
 const Conversations = ({conversationIds, messagesObject, approvedConnections}) => {
 
     const needMessageRefresh = useSelector(state => state.userMessages.needsRefresh)
+    const currentUser = useSelector(state => state.session.user)
 
 
     const [currentMessages, setCurrentMessages] = useState({});
@@ -45,13 +46,12 @@ const Conversations = ({conversationIds, messagesObject, approvedConnections}) =
     // }
 
 
-    console.log(messagesObject)
+    
 
     const unreadChecker = (otherId) => {
-        console.log(otherId)
-        console.log(messagesObject)
+
         if (currentMessages[otherId]) {
-            return currentMessages[otherId].some(message => message.read === false)
+            return currentMessages[otherId].some(message => message.read === false && message.recipient_id === currentUser.id)
         } else {
             return false;
         }

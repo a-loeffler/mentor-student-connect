@@ -249,6 +249,19 @@ router.post('/:studentId(\\d+)/connections', asyncHandler(async (req, res) => {
 }))
 
 
+router.patch('/:userId(\\d+)/messages/:messageId(\\d+)', asyncHandler(async (req, res) => {
+  
+  const messageId = parseInt(req.params.messageId, 10)
+
+  const messageToUpdate = await Message.findByPk(messageId);
+
+  messageToUpdate.update({read: true})
+
+  return res.json({messageId})
+
+
+}))
+
 
 
 module.exports = router;

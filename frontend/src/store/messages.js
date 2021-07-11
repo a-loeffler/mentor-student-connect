@@ -4,6 +4,7 @@ const GET_MESSAGES = "messages/get";
 const POST_MESSAGE = "messages/post";
 const SET_REFRESH = "messages/refresh";
 const SET_ACTIVE_MESSAGES = "messages/setActive"
+const PATCH_MESSAGE = "messages/patch"
 
 
 const getMessages = (messages, userId) => {
@@ -31,6 +32,14 @@ const setActiveMessagesId = (recipientId) => {
     return {
         type: SET_ACTIVE_MESSAGES,
         payload: recipientId
+    }
+}
+
+
+const patchMessage = (messageId, otherId) => {
+    return {
+        type: PATCH_MESSAGE,
+        payload: {messageId, otherId}
     }
 }
 
@@ -68,6 +77,15 @@ export const setIdForActiveMessages = (recipientId) => async(dispatch) => {
     dispatch(setActiveMessagesId(recipientId))
 }
 
+export const markMessagesAsRead = (messageId, userId, otherId) => async(dispatch) => {
+    const response = await csrfFetch(`/api/users/${userId}/messages/${messageId}`, {
+        method: "PATCH",
+    })
+
+    const data = await response.json()
+
+    dispatch(patchMessage(data.messageId, otherId))
+}
 
 const initialState = {allMessages: {}, needsRefresh: true, activeMessagesId: null}
 
@@ -126,6 +144,17 @@ const messagesReducer = (state = initialState, action) => {
             let recipientId = action.payload;
             newState.activeMessagesId = recipientId;
 
+            return newState;
+        }
+        case PATCH_MESSAGE: {
+            let newState = {...state};
+            let {messageId, otherId} = action.payload;
+
+            newState.allMessages[otherId].forEach(message => {
+                if (messageId === message.id) {
+                    message.read = true;
+                }
+            })
             return newState;
         }
         default: {
