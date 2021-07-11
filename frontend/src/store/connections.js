@@ -3,6 +3,7 @@ import { csrfFetch } from './csrf'
 const GET_CONNECTIONS = "connections/get";
 const SET_REFRESH = "connections/refresh"
 const POST_CONNECTION = "connections/post"
+const PATCH_CONNECTION = "connections/patch"
 
 const getConnections = (connectionData, userId) => {
     return {
@@ -24,6 +25,13 @@ const postConnection = (newConnectionData) => {
     return {
         type: POST_CONNECTION,
         payload: newConnectionData
+    }
+}
+
+const patchConnection = (approvedConnection) => {
+    return {
+        type: PATCH_CONNECTION,
+        payload: approvedConnection
     }
 }
 
@@ -54,6 +62,17 @@ export const postNewConnection = (studentId, mentorId) => async(dispatch) => {
 }
 
 
+export const approveConnection = (connectionId) => async(dispatch) => {
+    const response = await csrfFetch(`/api/connections/${connectionId}`, {
+        method: "PATCH",
+    })
+
+    const data = await response.json();
+
+    dispatch(patchConnection(data.connection))
+    return response;
+}
+
 
 const initialState = {allConnections: [], needsRefresh: true}
 
@@ -83,6 +102,19 @@ const connectionsReducer = (state = initialState, action) => {
             let newConnection = action.payload;
 
             newState.allConnections.push(newConnection);
+
+            return newState;
+        }
+        case PATCH_CONNECTION: {
+            let newState = {...state}
+
+            let approvedConnection = action.payload;
+
+            newState.allConnections.forEach(connection => {
+                if (connection.id === approvedConnection.id) {
+                    connection.approved = true;
+                }
+            })
 
             return newState;
         }

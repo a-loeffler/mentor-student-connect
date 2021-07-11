@@ -6,13 +6,10 @@ import * as sessionActions from './store/session';
 
 
 import LoginFormPage from './components/LoginFormPage';
-import SignUpFormPage from './components/SignUpFormPage';
 import Navigation from './components/Navigation';
-import MessagesWidget from './components/MessagesWidget';
-import CreateUserForm from './components/CreateUserForms/CreateUserForm';
 import SignUpMain from './components/SignupPages/SignupMain';
 import UserRouter from './components/UserPage/index';
-import FindMentorsWidget from './components/FindMentorsWidget/FindMentorsWidget';
+import ApproveConnectionsWidget from './components/FindMentorsWidget/ApproveConnectionsWidget';
 
 function App() {
   const dispatch = useDispatch()
@@ -35,6 +32,9 @@ function App() {
         </Route>
         <Route path="/users">
           <UserRouter />
+        </Route>
+        <Route path="/approve">
+          <ApproveConnectionsWidget />
         </Route>
       </Switch>
     </>

@@ -160,11 +160,11 @@ router.get('/:userId(\\d+)/connections', asyncHandler(async (req, res) => {
 
     let userInfo = await User.findByPk(otherUserId,
         {
-          attributes: ['id', 'first_name', 'last_name']
+          attributes: ['id', 'first_name', 'last_name', 'zip_code']
         }
       )
 
-    connections[i].dataValues.OtherUserInfo = {id: userInfo.dataValues.id, first_name: userInfo.dataValues.first_name, last_name: userInfo.dataValues.last_name}
+    connections[i].dataValues.OtherUserInfo = {id: userInfo.dataValues.id, first_name: userInfo.dataValues.first_name, last_name: userInfo.dataValues.last_name, zip_code:userInfo.dataValues.zip_code}
   }
 
   // otherUsers.forEach((otherUserId, index) => {
@@ -247,5 +247,6 @@ router.post('/:studentId(\\d+)/connections', asyncHandler(async (req, res) => {
 
   return res.json({connection: newConnection})
 }))
+
 
 module.exports = router;
