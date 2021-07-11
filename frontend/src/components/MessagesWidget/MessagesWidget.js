@@ -91,7 +91,7 @@ const MessagesWidget = () => {
 
             <div className="messages-widget-container">
                 <div className={`widget-action-bar ${minimized === false ? "" : "full-border"}`}>
-                    {`${minimized === false ? "": "Conversations"}`}
+                    Your Conversations
                     <button className="widget-collapse-button" onClick={e => minimizeActions(e)}>-</button>
                 </div>
                 <div className={`messages-component-container ${minimized === false ? "" : "minimized"}`}>
