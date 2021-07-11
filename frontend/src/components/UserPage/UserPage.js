@@ -7,6 +7,7 @@ import RedirectModal from '../RedirectModal';
 import UserEditPage from './UserEditPage';
 import MessagesWidget from '../MessagesWidget';
 import FindMentorsWidget from '../FindMentorsWidget/FindMentorsWidget';
+import ApproveConnectionsWidget from '../FindMentorsWidget/ApproveConnectionsWidget';
 
 import './index.css'
 
@@ -52,6 +53,7 @@ const UserPage = ({editorOpen}) => {
             <div className="user-page-widgets-container">
                 <MessagesWidget />
                 {currentUser.student === true && <FindMentorsWidget />}
+                {currentUser.mentor === true && <ApproveConnectionsWidget />}
             </div>
         </div>
     )
