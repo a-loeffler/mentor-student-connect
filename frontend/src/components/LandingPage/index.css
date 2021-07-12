@@ -1,3 +1,4 @@
+/* HERO IMAGE */
 
 .hero-container {
     position: relative;
@@ -67,7 +68,98 @@
 }
 
 .hero-bottom-whitespace {
-    height: 100px;
+    height: 5px;
     width: 100vw;
     background-color: #ffffff;
+}
+
+
+/* IDENTITY BOXES */
+.identity-boxes-container {
+    width: 100vw;
+    height: 150px;
+    background-color: #6EC1E4;
+    display: flex;
+    justify-content: center;
+
+
+}
+
+.identity-boxes-positioner {
+    width: 630px;
+    position: relative;
+}
+
+.identity-box {
+    width: 210px;
+    height: 250px;
+    display: inline-block;
+    box-shadow: 0px 3px 3px 3px #000000ad;
+    text-align: center;
+    padding-top: 40px;
+}
+
+.white-fill {
+    background-color: #ffffff;
+    color: #005467;
+}
+
+.white-fill:hover {
+    filter: brightness(90%)
+}
+
+.blue-fill {
+    background-color: #005467;
+    color: #ffffff;
+}
+
+.blue-fill:hover {
+    filter: brightness(90%)
+}
+
+.center-box {
+    z-index: 2;
+    height: 280px;
+    position: absolute;
+    left: 200px;
+    top: -40px;
+}
+
+.left-box {
+    position: absolute;
+    left: 10px;
+    top: -25px;
+}
+
+.right-box {
+    position: absolute;
+    right: 10px;
+    top: -25px;
+}
+
+.identity-box-h1 {
+    text-transform: uppercase;
+    font-weight: 900;
+}
+
+.identity-box-h2 {
+    font-size: 24px;
+}
+
+.identity-box-description-container {
+    margin: auto;
+    position: relative;
+    bottom: -120px;
+    width: max-content;
+}
+
+.identity-box-description{
+    font-size: 26px;
+    color: #005467;
+    text-shadow: 0px 1px 1px #000000;
+}
+
+.identity-box-whitespace {
+    width: 100vw;
+    height: 200px;
 }
