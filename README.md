@@ -5,11 +5,11 @@
 
 **Table of Contents**
 
-* Mentor Student Connect Purpose and Overview
-* Design and Build Framework
+* [Mentor Student Connect Purpose and Overview](#mentor-student-connect-purpose-and-overview)
+* [Design and Build Framework](#design-and-build-framework)
 * [Frontend Overview](#frontend-overview)
 * [Backend Overview](#backend-overview)
-* Conclusion & Next Steps
+* [Conclusion & Next Steps](#conclusion--next-steps)
 
 ## Mentor Student Connect Purpose and Overview
 
