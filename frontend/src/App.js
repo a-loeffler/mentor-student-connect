@@ -25,6 +25,9 @@ function App() {
     <>
       <Navigation isLoaded={isLoaded}/>
       <Switch>
+        <Route path="/" exact>
+          <LandingPage />
+        </Route>
         <Route path="/login">
           <LoginFormPage />
         </Route>
@@ -33,9 +36,6 @@ function App() {
         </Route>
         <Route path="/users">
           <UserRouter />
-        </Route>
-        <Route path="/landing-page">
-          <LandingPage />
         </Route>
       </Switch>
     </>

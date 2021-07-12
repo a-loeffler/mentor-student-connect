@@ -23,8 +23,8 @@ const ProfileModal = () => {
     return (
         <div className="profile-modal-container">
             <ul className="profile-menu-list">
-                <li className="profile-menu-list-item">Find Nearby Events</li>
-                <li className="profile-menu-list-item">Locate a Mentor</li>
+                <li className="profile-menu-list-item">Find Nearby Events *Coming Soon</li>
+                <li className="profile-menu-list-item">Locate a Mentor *Coming Soon</li>
                 <li className="profile-menu-list-item" onClick={e => goToEditPage(e)}>Edit Account Settings</li>
                 <li className="profile-menu-list-item log-out-item" onClick={e => logoutActions(e)}>Log Out</li>
             </ul>
