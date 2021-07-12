@@ -160,7 +160,7 @@ const Navbar = () => {
                             <h1 className="navbar-menu-link-text">News and Events</h1>
                         </li>
                         <li className="navbar-menu-items-list-item">
-                            <h1 className="navbar-menu-link-text">Contact Us</h1>
+                            <h1 className="navbar-menu-link-text">About Us</h1>
                         </li>
                         {!currentUser && <li className="navbar-menu-items-button-container">
                             <button className="navbar-menu-login-button" onClick={e => clickLogin(e)}>Login</button>

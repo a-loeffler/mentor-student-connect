@@ -151,6 +151,7 @@
     position: relative;
     bottom: -120px;
     width: max-content;
+    height: 30px;
 }
 
 .identity-box-description{
@@ -162,4 +163,126 @@
 .identity-box-whitespace {
     width: 100vw;
     height: 200px;
+}
+
+
+/* MENTOR PLUGS */
+.mentor-plug-container {
+    position: relative;
+    top: -50px;
+    background: linear-gradient(to bottom, #005467, #6EC1E499 50%, #E0AA4E 80%);
+    padding-bottom: 25px;
+}
+
+.mentor-plug-1 {
+    text-align: center;
+}
+
+.mentor-plug-h1 {
+    font-size: 48px;
+    text-align: center;
+}
+
+.mentor-plug-text {
+    color: #ffffff;
+    font-size: 24px;
+}
+
+.blue-text {
+    color: #6EC1E4;
+}
+
+.gold-text {
+    color: #E0AA4E;
+}
+
+.brown-text {
+    color: #453936;
+}
+
+.width-25 {
+    width: 25%;
+    height: auto;
+}
+
+.width-80 {
+    width: 80%;
+}
+
+.top-20 {
+    margin-top: 20px;
+}
+
+.center {
+    margin: auto;
+}
+
+.mentor-plug-2 {
+    display: grid;
+    grid-template-columns: 40% 60%;
+    width: 60%;
+    margin: auto;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    background-color: #453936;
+}
+
+.mentor-plug-2-image {
+    width: 100%;
+    height: auto;
+}
+
+.mentor-plug-2-text {
+    padding: 20px;
+}
+
+.mentor-plug-quote {
+    font-size: 28px;
+
+}
+
+.right-align {
+    text-align: right;
+}
+
+
+/* ABOUT US */
+.social-icon {
+    height: 25px;
+    width: auto;
+    margin: 10px;
+
+}
+
+.social-icon:hover {
+    filter: brightness(75%);
+}
+
+.about-us-container {
+    background-color: #453936;
+    height: 200px;
+    display: grid;
+    grid-template-columns: 70% 30%;
+}
+
+.footer-logo {
+    height: 100px;
+    width: auto;
+    margin-left: 50px;
+}
+
+.about-us-info-container {
+    text-align: right;
+    padding-top: 50px;
+}
+
+.about-us-site-info-container {
+    display: flex;
+    align-items: center;
+}
+
+.about-info-text {
+    color:#E0AA4E;
+    font-size: 18px;
+
 }
