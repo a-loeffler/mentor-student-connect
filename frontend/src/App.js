@@ -34,6 +34,9 @@ function App() {
         <Route path="/users">
           <UserRouter />
         </Route>
+        <Route path="/events">
+          <div><h1>Coming soon!</h1></div>
+        </Route>
         <Route path="*">
           <div><h1 >404 Not found</h1></div>
         </Route>

@@ -128,6 +128,12 @@ const Navbar = () => {
         setGetInvolvedModalShowing(!getInvolvedModalShowing)
     }
 
+    const clickNewsAndEvents = (e) => {
+        e.preventDefault();
+
+        history.push("/events")
+    }
+
     const goToUserPage = (e) => {
         e.preventDefault();
 
@@ -158,7 +164,7 @@ const Navbar = () => {
                             {getInvolvedModalShowing && <GetInvolvedModal />}
                         </li>
                         <li className="navbar-menu-items-list-item">
-                            <h1 className="navbar-menu-link-text">News and Events</h1>
+                            <h1 className="navbar-menu-link-text" onClick={e => clickNewsAndEvents(e)}>News and Events</h1>
                         </li>
                         <li className="navbar-menu-items-list-item">
                             <HashLink style={{textDecoration: 'none'}} to="/#about-us">
