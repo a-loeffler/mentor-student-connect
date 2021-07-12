@@ -28,14 +28,14 @@ function App() {
         <Route path="/" exact>
           <LandingPage />
         </Route>
-        <Route path="/login">
-          <LoginFormPage />
-        </Route>
         <Route path="/signup">
           <SignUpMain />
         </Route>
         <Route path="/users">
           <UserRouter />
+        </Route>
+        <Route path="*">
+          <div><h1 >404 Not found</h1></div>
         </Route>
       </Switch>
     </>

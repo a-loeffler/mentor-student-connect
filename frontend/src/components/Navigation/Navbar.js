@@ -88,7 +88,7 @@ const Navbar = () => {
 
 
     useEffect(() => {
-        if (messagesObject) {
+        if (messagesObject && currentUser) {
             for (let otherUserId in messagesObject) {
                 let messageArray = messagesObject[otherUserId];
                 if (messageArray.some(message => message.recipient_id === currentUser.id && message.read === false)) {

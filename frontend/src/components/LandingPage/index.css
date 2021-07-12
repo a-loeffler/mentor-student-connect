@@ -263,6 +263,7 @@
     height: 200px;
     display: grid;
     grid-template-columns: 70% 30%;
+    padding-right: 50px;
 }
 
 .footer-logo {
