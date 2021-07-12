@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
+import { HashLink } from 'react-router-hash-link';
 
 import LoginModal from "./LoginModal";
 import ProfileModal from "./ProfileModal";
@@ -160,7 +161,9 @@ const Navbar = () => {
                             <h1 className="navbar-menu-link-text">News and Events</h1>
                         </li>
                         <li className="navbar-menu-items-list-item">
-                            <h1 className="navbar-menu-link-text">Contact Us</h1>
+                            <HashLink style={{textDecoration: 'none'}} to="/#about-us">
+                                <h1 className="navbar-menu-link-text" >About Us</h1>
+                            </HashLink>
                         </li>
                         {!currentUser && <li className="navbar-menu-items-button-container">
                             <button className="navbar-menu-login-button" onClick={e => clickLogin(e)}>Login</button>

@@ -1,3 +1,4 @@
+/* HERO IMAGE */
 
 .hero-container {
     position: relative;
@@ -67,7 +68,221 @@
 }
 
 .hero-bottom-whitespace {
-    height: 100px;
+    height: 5px;
     width: 100vw;
     background-color: #ffffff;
+}
+
+
+/* IDENTITY BOXES */
+.identity-boxes-container {
+    width: 100vw;
+    height: 150px;
+    background-color: #6EC1E4;
+    display: flex;
+    justify-content: center;
+
+
+}
+
+.identity-boxes-positioner {
+    width: 630px;
+    position: relative;
+}
+
+.identity-box {
+    width: 210px;
+    height: 250px;
+    display: inline-block;
+    box-shadow: 0px 3px 3px 3px #000000ad;
+    text-align: center;
+    padding-top: 40px;
+}
+
+.white-fill {
+    background-color: #ffffff;
+    color: #005467;
+}
+
+.white-fill:hover {
+    filter: brightness(90%)
+}
+
+.blue-fill {
+    background-color: #005467;
+    color: #ffffff;
+}
+
+.blue-fill:hover {
+    filter: brightness(90%)
+}
+
+.center-box {
+    z-index: 2;
+    height: 280px;
+    position: absolute;
+    left: 200px;
+    top: -40px;
+}
+
+.left-box {
+    position: absolute;
+    left: 10px;
+    top: -25px;
+}
+
+.right-box {
+    position: absolute;
+    right: 10px;
+    top: -25px;
+}
+
+.identity-box-h1 {
+    text-transform: uppercase;
+    font-weight: 900;
+}
+
+.identity-box-h2 {
+    font-size: 24px;
+}
+
+.identity-box-description-container {
+    margin: auto;
+    position: relative;
+    bottom: -120px;
+    width: max-content;
+    height: 30px;
+}
+
+.identity-box-description{
+    font-size: 26px;
+    color: #005467;
+    text-shadow: 0px 1px 1px #000000;
+}
+
+.identity-box-whitespace {
+    width: 100vw;
+    height: 200px;
+}
+
+
+/* MENTOR PLUGS */
+.mentor-plug-container {
+    position: relative;
+    top: -50px;
+    background: linear-gradient(to bottom, #005467, #6EC1E499 50%, #E0AA4E 80%);
+    padding-bottom: 25px;
+}
+
+.mentor-plug-1 {
+    text-align: center;
+}
+
+.mentor-plug-h1 {
+    font-size: 48px;
+    text-align: center;
+}
+
+.mentor-plug-text {
+    color: #ffffff;
+    font-size: 24px;
+}
+
+.blue-text {
+    color: #6EC1E4;
+}
+
+.gold-text {
+    color: #E0AA4E;
+}
+
+.brown-text {
+    color: #453936;
+}
+
+.width-25 {
+    width: 25%;
+    height: auto;
+}
+
+.width-80 {
+    width: 80%;
+}
+
+.top-20 {
+    margin-top: 20px;
+}
+
+.center {
+    margin: auto;
+}
+
+.mentor-plug-2 {
+    display: grid;
+    grid-template-columns: 40% 60%;
+    width: 60%;
+    margin: auto;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    background-color: #453936;
+}
+
+.mentor-plug-2-image {
+    width: 100%;
+    height: auto;
+}
+
+.mentor-plug-2-text {
+    padding: 20px;
+}
+
+.mentor-plug-quote {
+    font-size: 28px;
+
+}
+
+.right-align {
+    text-align: right;
+}
+
+
+/* ABOUT US */
+.social-icon {
+    height: 25px;
+    width: auto;
+    margin: 10px;
+
+}
+
+.social-icon:hover {
+    filter: brightness(75%);
+}
+
+.about-us-container {
+    background-color: #453936;
+    height: 200px;
+    display: grid;
+    grid-template-columns: 70% 30%;
+}
+
+.footer-logo {
+    height: 100px;
+    width: auto;
+    margin-left: 50px;
+}
+
+.about-us-info-container {
+    text-align: right;
+    padding-top: 50px;
+}
+
+.about-us-site-info-container {
+    display: flex;
+    align-items: center;
+}
+
+.about-info-text {
+    color:#E0AA4E;
+    font-size: 18px;
+
 }
