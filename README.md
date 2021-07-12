@@ -7,8 +7,8 @@
 
 * Mentor Student Connect Purpose and Overview
 * Design and Build Framework
-* Frontend Overview
-* Backend Overview
+* [Frontend Overview](#frontend-overview)
+* [Backend Overview](#backend-overview)
 * Conclusion & Next Steps
 
 ## Mentor Student Connect Purpose and Overview
