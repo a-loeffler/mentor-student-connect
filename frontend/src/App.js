@@ -9,7 +9,8 @@ import LoginFormPage from './components/LoginFormPage';
 import Navigation from './components/Navigation';
 import SignUpMain from './components/SignupPages/SignupMain';
 import UserRouter from './components/UserPage/index';
-import ApproveConnectionsWidget from './components/FindMentorsWidget/ApproveConnectionsWidget';
+import LandingPage from './components/LandingPage'
+
 
 function App() {
   const dispatch = useDispatch()
@@ -33,8 +34,8 @@ function App() {
         <Route path="/users">
           <UserRouter />
         </Route>
-        <Route path="/approve">
-          <ApproveConnectionsWidget />
+        <Route path="/landing-page">
+          <LandingPage />
         </Route>
       </Switch>
     </>

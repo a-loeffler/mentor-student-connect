@@ -20,7 +20,11 @@ const Navbar = () => {
     const [profileModalShowing, setProfileModalShowing] = useState(false);
     const [getInvolvedModalShowing, setGetInvolvedModalShowing] = useState(false);
 
+    const [nofifyUnread, setNotifyUnread] = useState(false);
+
     const currentUser = useSelector(state => state.session.user);
+
+    const messagesObject = useSelector(state => state.userMessages.allMessages);
 
 
     useEffect(() => {
@@ -75,7 +79,25 @@ const Navbar = () => {
                 loginButton.classList.remove("dark-blue")
             }
         }
+
+
+
+
     })
+
+
+    useEffect(() => {
+        if (messagesObject) {
+            for (let otherUserId in messagesObject) {
+                let messageArray = messagesObject[otherUserId];
+                if (messageArray.some(message => message.recipient_id === currentUser.id && message.read === false)) {
+                    setNotifyUnread(true)
+                }
+            }
+        }
+    })
+
+
 
 
     const clickLogin = (e) => {
@@ -150,7 +172,7 @@ const Navbar = () => {
                             </div>
                             {profileModalShowing && <ProfileModal />}
                             <h1 className="navbar-menu-profile-name" >{`Welcome, ${currentUser.username}`}</h1>
-                            <div className="new-message-notification" >!</div>
+                            {nofifyUnread && <div className="new-message-notification" >!</div>}
                             <img className="profile-messages-icon" src="/images/envelope.svg" alt="click here to see your messages" onClick={e => clickMessages(e)}></img>
                         </li>}
                     </ul>

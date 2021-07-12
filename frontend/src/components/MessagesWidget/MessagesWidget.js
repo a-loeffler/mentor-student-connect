@@ -78,7 +78,7 @@ const MessagesWidget = () => {
             })
         }
 
-    }, [messagesObject, activeTexts, minimized, user, connections, loader])
+    }, [messagesObject, activeTexts, minimized, user, connections, loader, dispatch, userId])
 
 
     //
